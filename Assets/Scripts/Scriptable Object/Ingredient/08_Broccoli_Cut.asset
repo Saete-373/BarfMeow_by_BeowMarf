@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6765514a4ed3dc48898582ada430fc3, type: 3}
+  m_Name: 08_Broccoli_Cut
+  m_EditorClassIdentifier: 
+  ingredientName: Broccoli_Cut
+  ingredientPart: {fileID: 4858226992800364796, guid: 1387c6393686ab54bbc04b2563680a4f, type: 3}
+  ingredientSprite: {fileID: -1493396829, guid: 6a463d0fc2e86a943a5f4cadb7219718, type: 3}
+  cookedSprite: {fileID: -307250766, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}

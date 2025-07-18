@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6765514a4ed3dc48898582ada430fc3, type: 3}
+  m_Name: 11_Carrot_Cut
+  m_EditorClassIdentifier: 
+  ingredientName: Carrot_Cut
+  ingredientPart: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
+  ingredientSprite: {fileID: -424696084, guid: 9d37a15d08ce1964993f612762255025, type: 3}
+  cookedSprite: {fileID: 1005120062, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

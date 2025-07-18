@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
+  m_Name: 01_Hot_Milk
+  m_EditorClassIdentifier: 
+  foodName: Hot Milk
+  foodLevel: Easy
+  foodPrice: 5
+  foodSprite: {fileID: 666164274, guid: 117f6bff9fe463345955f77120220239, type: 3}
+  orderMaxTime: 90
+  foodPrefab: {fileID: 3463575768556359619, guid: a039d7aaccd717a4281dc43a0cc306af, type: 3}
+  ingredients:
+  - {fileID: 11400000, guid: 60aa478b04205ae47b0fb8a1134c5081, type: 2}

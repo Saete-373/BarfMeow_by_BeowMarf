@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
+  m_Name: 04_Oyako_Barf
+  m_EditorClassIdentifier: 
+  foodName: Oyako Barf
+  foodLevel: Medium
+  foodPrice: 8
+  foodSprite: {fileID: -2144576304, guid: 6e8d19541f6374c49b70394841466707, type: 3}
+  orderMaxTime: 120
+  foodPrefab: {fileID: 4350137336005621577, guid: e2d43c30f7204a84184fbdd2d032d18c, type: 3}
+  ingredients:
+  - {fileID: 11400000, guid: 9a34fbe6f3d09dd46a207b6ba2e077a8, type: 2}
+  - {fileID: 11400000, guid: 758720ee8dacc724fb9b505469645720, type: 2}
+  - {fileID: 11400000, guid: 4f64e359dd310af499f0d5c25c611438, type: 2}

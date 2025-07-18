@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6765514a4ed3dc48898582ada430fc3, type: 3}
+  m_Name: 01_Chicken_Boil
+  m_EditorClassIdentifier: 
+  ingredientName: Chicken_Boil
+  ingredientPart: {fileID: 2817631183811046102, guid: 8198599f84eea724a95907190a0e0c3c, type: 3}
+  ingredientSprite: {fileID: -1705788478, guid: b0c103b3b25da9c45a58d8420ee4c456, type: 3}
+  cookedSprite: {fileID: -834611659, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

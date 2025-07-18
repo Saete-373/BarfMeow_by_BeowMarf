@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
+  m_Name: 09_Salmon_Royal
+  m_EditorClassIdentifier: 
+  foodName: Salmon Royal
+  foodLevel: Hard
+  foodPrice: 12
+  foodSprite: {fileID: 87462363, guid: a80d877b769e0f84eaed337232ac7be9, type: 3}
+  orderMaxTime: 150
+  foodPrefab: {fileID: 4465586118489242860, guid: b60745ed644f95144a21c8e58abfce2a, type: 3}
+  ingredients:
+  - {fileID: 11400000, guid: 156c035dd488cd148af656e7d59f5cbd, type: 2}
+  - {fileID: 11400000, guid: cff485a453752e24eae7162cda7c6cc7, type: 2}
+  - {fileID: 11400000, guid: 3bc5f2a930dc3274086d435706195d83, type: 2}

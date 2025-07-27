@@ -16,7 +16,7 @@ MonoBehaviour:
   foodLevel: Hard
   foodPrice: 12
   foodSprite: {fileID: 87462363, guid: a80d877b769e0f84eaed337232ac7be9, type: 3}
-  orderMaxTime: 150
+  orderMaxTime: 180
   foodPrefab: {fileID: 4465586118489242860, guid: b60745ed644f95144a21c8e58abfce2a, type: 3}
   ingredients:
   - {fileID: 11400000, guid: 156c035dd488cd148af656e7d59f5cbd, type: 2}

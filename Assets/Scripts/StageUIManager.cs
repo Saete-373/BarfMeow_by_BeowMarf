@@ -60,6 +60,7 @@ public class StageUIManager : MonoBehaviour
     public void BackToMenu()
     {
         Debug.Log("Returning to select stage.");
+        AudioManager.instance.Play("Click");
 
         SceneManager.LoadScene("Menu");
     }
@@ -67,6 +68,7 @@ public class StageUIManager : MonoBehaviour
     public void LoadGame(int gameStage)
     {
         Debug.Log("Starting the game for stage: " + gameStage);
+
         StageManager.Instance.CurrentStage = gameStage - 1;
         SceneManager.LoadScene("Game");
     }

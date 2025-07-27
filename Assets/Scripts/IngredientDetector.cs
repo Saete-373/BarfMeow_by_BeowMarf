@@ -28,8 +28,8 @@ public class IngredientDetector : MonoBehaviour
     #region Internal Data
     List<IngredientObject> currentIngredientList = new();
     private List<List<Vector3>> _ingredientPositions;
-    private Vector3 wastePosition = new(0, 0.285f, 0);
-    private Vector3 milkPosition = new(0, 0.2846f, 0);
+    private Vector3 wastePosition = new(0, -0.017f, 0);
+    private Vector3 milkPosition = new(0, -0.016f, 0);
     private bool isUpdating = false;
 
     #endregion
@@ -44,25 +44,25 @@ public class IngredientDetector : MonoBehaviour
         {
             new List<Vector3>
             {
-                new(0, 0.318f, 0)
+                new(0, -0.005f, 0)
             },
             new List<Vector3>
             {
-                new(-0.087f, 0.319f, 0),
-                new(0.075f, 0.306f, 0)
+                new(-0.087f, -0.005f, 0),
+                new(0.075f, -0.012f, 0)
             },
             new List<Vector3>
             {
-                new(-0.092f, 0.318f, 0),
-                new(0.07f, 0.305f, 0),
-                new(0.004f, 0.3669f, 0)
+                new(-0.092f, -0.005f, 0),
+                new(0.07f, -0.013f, 0),
+                new(0.004f, -0.0489f, 0)
             },
             new List<Vector3>
             {
-                new(-0.092f, 0.318f, 0),
-                new(0.084f, 0.305f, 0),
-                new(-0.05f, 0.366f, 0),
-                new(0.055f, 0.336f, 0)
+                new(-0.092f, -0.005f, 0),
+                new(0.084f, -0.013f, 0),
+                new(-0.05f, 0.048f, 0),
+                new(0.055f, 0.018f, 0)
             }
         };
 
@@ -116,7 +116,7 @@ public class IngredientDetector : MonoBehaviour
 
                 // Instantiate Menu
                 Transform instantiatedMenu = Instantiate(menuObject.foodPrefab.transform, transform.position, Quaternion.identity, transform);
-                instantiatedMenu.localPosition = new Vector3(0, 0.3f, 0);
+                instantiatedMenu.localPosition = new Vector3(0, 0, 0);
 
                 // Clean up existing food parts in the dish before adding the menu item
                 foreach (Transform child in transform)

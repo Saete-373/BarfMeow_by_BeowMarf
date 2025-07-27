@@ -16,7 +16,7 @@ MonoBehaviour:
   foodLevel: Medium
   foodPrice: 8
   foodSprite: {fileID: -2046799906, guid: 8ac719d4ff18e1f4e8c341f5047d7f49, type: 3}
-  orderMaxTime: 120
+  orderMaxTime: 150
   foodPrefab: {fileID: 3405366604219117853, guid: f480ad9c3617d1d46947590fbbdef128, type: 3}
   ingredients:
   - {fileID: 11400000, guid: cb9f45c8a288d4a4cba2c17a8e28c218, type: 2}

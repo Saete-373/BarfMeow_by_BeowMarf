@@ -9,9 +9,14 @@ public class GestureRecognizer : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private bool useFrontCamera = true;
-    [SerializeField] private int targetWidth = 72;
-    [SerializeField] private int targetHeight = 54;
+    [SerializeField] private int targetWidth = 640;
+    [SerializeField] private int targetHeight = 480;
     [SerializeField] private int targetFrameRate = 30;
+    [SerializeField] private bool maintainAspectRatio = true;
+
+    [Header("Capture Settings")]
+    [SerializeField] private int captureWidth = 640;
+    [SerializeField] private int captureHeight = 480;
 
     [Header("Display Settings")]
     [SerializeField] private RawImage cameraDisplay;
@@ -21,6 +26,7 @@ public class GestureRecognizer : MonoBehaviour
     [Header("Server Settings")]
     [SerializeField] private string serverUrl = "http://localhost:5000/predict";
     [SerializeField] private float captureInterval = 0.05f;
+
 
     private WebCamTexture webCamTexture;
     private Texture2D captureTexture;
@@ -83,9 +89,34 @@ public class GestureRecognizer : MonoBehaviour
             deviceName = devices[0].name;
         }
 
-        // Create webcam texture
-        webCamTexture = new WebCamTexture(deviceName, targetWidth, targetHeight, targetFrameRate);
+        // Create webcam texture - let it use its native resolution first
+        webCamTexture = new WebCamTexture(deviceName);
         webCamTexture.Play();
+
+        // Wait for the webcam to initialize
+        StartCoroutine(WaitForWebcamInitialization());
+    }
+
+    private IEnumerator WaitForWebcamInitialization()
+    {
+        // Wait for webcam to be ready
+        while (webCamTexture.width <= 16 || webCamTexture.height <= 16)
+        {
+            yield return null;
+        }
+        // 1920x1080
+        // Debug.Log($"Webcam initialized: {webCamTexture.width}x{webCamTexture.height}");
+
+        // Create new webcam texture with adjusted resolution
+        webCamTexture.Stop();
+        webCamTexture = new WebCamTexture(webCamTexture.deviceName, targetWidth, targetHeight, targetFrameRate);
+        webCamTexture.Play();
+
+        // Wait for it to initialize again
+        while (webCamTexture.width <= 16 || webCamTexture.height <= 16)
+        {
+            yield return null;
+        }
 
         // Set up display
         if (cameraDisplay != null)
@@ -93,8 +124,60 @@ public class GestureRecognizer : MonoBehaviour
             cameraDisplay.texture = webCamTexture;
         }
 
-        // Create texture for capturing frames
-        captureTexture = new Texture2D(targetWidth, targetHeight, TextureFormat.RGB24, false);
+        // Create texture for capturing frames with fixed 4:3 aspect ratio
+        captureTexture = new Texture2D(captureWidth, captureHeight, TextureFormat.RGB24, false);
+
+        Debug.Log($"Webcam initialized: {webCamTexture.width}x{webCamTexture.height}");
+        Debug.Log($"Capture texture fixed at: {captureWidth}x{captureHeight}");
+    }
+
+    private Color32[] CropWebcamTo4x3(Color32[] pixels, int webcamWidth, int webcamHeight)
+    {
+        float webcamAspect = (float)webcamWidth / webcamHeight;
+        float targetAspect = (float)captureWidth / captureHeight; // 4:3
+
+        int cropX = 0, cropY = 0;
+        int cropWidth = webcamWidth;
+        int cropHeight = webcamHeight;
+
+        if (webcamAspect > targetAspect)
+        {
+            // Webcam is wider than 4:3, crop width
+            cropWidth = Mathf.RoundToInt(webcamHeight * targetAspect);
+            cropX = (webcamWidth - cropWidth) / 2;
+        }
+        else if (webcamAspect < targetAspect)
+        {
+            // Webcam is taller than 4:3, crop height
+            cropHeight = Mathf.RoundToInt(webcamWidth / targetAspect);
+            cropY = (webcamHeight - cropHeight) / 2;
+        }
+
+        // Create array for cropped pixels
+        Color32[] croppedPixels = new Color32[captureWidth * captureHeight];
+
+        // Sample from cropped area and resize to capture dimensions
+        for (int y = 0; y < captureHeight; y++)
+        {
+            for (int x = 0; x < captureWidth; x++)
+            {
+                // Map from capture coordinates to cropped webcam coordinates
+                int sourceX = cropX + (x * cropWidth) / captureWidth;
+                int sourceY = cropY + (y * cropHeight) / captureHeight;
+
+                // Clamp to ensure we don't go out of bounds
+                sourceX = Mathf.Clamp(sourceX, 0, webcamWidth - 1);
+                sourceY = Mathf.Clamp(sourceY, 0, webcamHeight - 1);
+
+                // Unity textures are bottom-left origin, so we need to flip Y
+                int sourceIndex = sourceY * webcamWidth + sourceX;
+                int targetIndex = y * captureWidth + x;
+
+                croppedPixels[targetIndex] = pixels[sourceIndex];
+            }
+        }
+
+        return croppedPixels;
     }
 
     void Update()
@@ -107,8 +190,10 @@ public class GestureRecognizer : MonoBehaviour
         {
             cameraDisplay.rectTransform.localEulerAngles = new Vector3(0, 180, 0);
 
-            // Use actual webcam dimensions, not target dimensions
-            cameraDisplay.rectTransform.sizeDelta = new Vector2(targetWidth, targetHeight);
+            // Use actual webcam dimensions and maintain aspect ratio
+            float aspectRatio = (float)webCamTexture.width / webCamTexture.height;
+            Vector2 displaySize = new Vector2(targetWidth, targetWidth / aspectRatio);
+            cameraDisplay.rectTransform.sizeDelta = displaySize;
         }
 
         // Update gesture text
@@ -140,28 +225,42 @@ public class GestureRecognizer : MonoBehaviour
             yield break;
         }
 
-        // Check if we need to resize the capture texture
-        if (captureTexture.width != webCamTexture.width || captureTexture.height != webCamTexture.height)
+        // Capture texture is always fixed at 1280x960, no need to resize
+        if (captureTexture == null)
         {
-            // Recreate the capture texture with the correct dimensions
-            captureTexture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGB24, false);
-            // Debug.Log($"Resized capture texture to match webcam: {webCamTexture.width}x{webCamTexture.height}");
+            captureTexture = new Texture2D(captureWidth, captureHeight, TextureFormat.RGB24, false);
         }
 
-        // Capture frame from webcam
-        Color32[] pixels = webCamTexture.GetPixels32();
-        captureTexture.SetPixels32(pixels);
-        captureTexture.Apply();
+        string jsonData = "";
 
-        // Convert texture to jpg
-        byte[] jpgData = captureTexture.EncodeToJPG(50);
-        string base64Image = Convert.ToBase64String(jpgData);
+        // WebGL-specific fix: ensure texture is readable
+        try
+        {
+            // Capture frame from webcam
+            Color32[] webcamPixels = webCamTexture.GetPixels32();
 
-        // Create request data
-        GestureRequest requestData = new GestureRequest { image = base64Image };
-        string jsonData = JsonUtility.ToJson(requestData);
+            // Crop and resize to 4:3 aspect ratio (1280x960)
+            Color32[] croppedPixels = CropWebcamTo4x3(webcamPixels, webCamTexture.width, webCamTexture.height);
 
-        // Send to server
+            // Apply cropped pixels to capture texture
+            captureTexture.SetPixels32(webcamPixels);
+            captureTexture.Apply();
+
+            // Convert texture to jpg with higher quality for WebGL
+            byte[] jpgData = captureTexture.EncodeToJPG(75);
+            string base64Image = Convert.ToBase64String(jpgData);
+
+            // Create request data
+            GestureRequest requestData = new GestureRequest { image = base64Image };
+            jsonData = JsonUtility.ToJson(requestData);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error capturing image: {e.Message}");
+            yield break;
+        }
+
+        // Send to server (outside try block to avoid yield in try-catch)
         using (UnityWebRequest request = new UnityWebRequest(serverUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
@@ -169,11 +268,14 @@ public class GestureRecognizer : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
+            // WebGL-specific timeout settings
+            request.timeout = 10;
+
             yield return request.SendWebRequest();
 
-            try
+            if (request.result == UnityWebRequest.Result.Success)
             {
-                if (request.result == UnityWebRequest.Result.Success)
+                try
                 {
                     GestureResponse response = JsonUtility.FromJson<GestureResponse>(request.downloadHandler.text);
 
@@ -198,44 +300,28 @@ public class GestureRecognizer : MonoBehaviour
                     // Debug.LogError($"Server error: {response.error}");
                     // }
                 }
-                else
+                catch (Exception e)
                 {
-                    Debug.LogError($"Request error: {request.error}");
+                    Debug.LogError($"Error processing server response: {e.Message}");
                 }
             }
-            catch (Exception e)
+            else
             {
-                Debug.LogError($"Error capturing or sending image: {e.Message}");
+                Debug.LogError($"Request error: {request.error}");
             }
         }
-
     }
-
-    // void OnGestureDetected(string gesture)
-    // {
-    //     // Debug.Log($"Detected gesture: {gesture}");
-
-    //     // You can trigger game events based on detected gestures here
-    //     // For example:
-    //     switch (gesture)
-    //     {
-    //         case "stop":
-    //             // Handle stop gesture
-    //             break;
-
-    //         case "back":
-    //             // Handle back gesture
-    //             break;
-
-    //             // Add more gestures as needed
-    //     }
-    // }
 
     void OnDestroy()
     {
         if (webCamTexture != null && webCamTexture.isPlaying)
         {
             webCamTexture.Stop();
+        }
+
+        if (captureTexture != null)
+        {
+            DestroyImmediate(captureTexture);
         }
     }
 

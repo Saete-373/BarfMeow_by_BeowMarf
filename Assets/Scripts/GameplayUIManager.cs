@@ -16,6 +16,7 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private GameObject _canvas;
 
 
+
     [Header("Setting UI")]
     [SerializeField] private GameObject _settingPanel;
 
@@ -114,6 +115,7 @@ public class GameplayUIManager : MonoBehaviour
     {
         _settingPanel.SetActive(false);
         GameplayManager.Instance.SetPause(false);
+        AudioManager.instance.Play("Click");
     }
 
 
@@ -134,6 +136,8 @@ public class GameplayUIManager : MonoBehaviour
     {
         Debug.Log("Proceeding to the next game stage.");
         _endGamePanel.SetActive(false);
+        _canvas.SetActive(false);
+        AudioManager.instance.Play("Click");
         if (StageManager.Instance.CurrentStage >= StageManager.Instance.stageList.Count)
         {
             SceneManager.LoadScene("Stage");
@@ -148,6 +152,10 @@ public class GameplayUIManager : MonoBehaviour
     public void BackToStage()
     {
         Debug.Log("Returning to select stage.");
+        _endGamePanel.SetActive(false);
+        _settingPanel.SetActive(false);
+        _canvas.SetActive(false);
+        AudioManager.instance.Play("Click");
 
         SceneManager.LoadScene("Stage");
 

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageName: STAGE 1
   stageNumber: 1
-  rent: 5
-  playTime: 300
+  rent: 10
+  playTime: 180
   foodList: {fileID: 11400000, guid: 1ff329db7225a864293823a8562d21b4, type: 2}

@@ -47,6 +47,12 @@ MonoBehaviour:
   testVolume: 0.3
   testIndex: 3
   sounds:
+  - name: Menu-BGM
+    clip: {fileID: 8300000, guid: 22c199a649629c648990d633f59dd712, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Game-BGM
     clip: {fileID: 8300000, guid: 6a3c9213b32df4b4c9bde26405133491, type: 3}
     volume: 0.1

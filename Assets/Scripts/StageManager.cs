@@ -31,7 +31,7 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.instance.Play("Game-BGM", 0.5f);
+        AudioManager.instance.Play("Menu-BGM", 0.5f);
     }
 
     void Update()

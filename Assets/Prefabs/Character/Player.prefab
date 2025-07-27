@@ -360,7 +360,6 @@ MonoBehaviour:
   _gestureRecognizer: {fileID: 7038701816495255732}
   _plateList: {fileID: 598426057519695597}
   _orderList: {fileID: 2268436312055224478}
-  _gameUIManager: {fileID: 0}
   _cloudEffect: {fileID: 3033985502738951946}
   _canvas: {fileID: 3466988921521783697}
 --- !u!114 &6266768310483299124
@@ -391,9 +390,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useFrontCamera: 0
-  targetWidth: 72
-  targetHeight: 54
-  targetFrameRate: 60
+  targetWidth: 640
+  targetHeight: 480
+  targetFrameRate: 30
+  maintainAspectRatio: 0
+  captureWidth: 640
+  captureHeight: 480
   cameraDisplay: {fileID: 8431928504830086320}
   gestureText: {fileID: 2010752334755757650}
   fpsText: {fileID: 7994100849830477157}
@@ -640,7 +642,7 @@ RectTransform:
   m_GameObject: {fileID: 2542075902490570062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 314063266491376945}
@@ -648,7 +650,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 72, y: 54}
+  m_SizeDelta: {x: 640, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1879364556034030474
 CanvasRenderer:

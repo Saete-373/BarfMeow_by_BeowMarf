@@ -63,7 +63,7 @@ public class GameplayManager : MonoBehaviour
 
     public void InitGameData()
     {
-        AudioManager.instance.StopSound("Game-BGM");
+        AudioManager.instance.StopSound("Menu-BGM");
 
         AudioManager.instance.Play("Game-BGM", 0.5f);
         AudioManager.instance.Play("Start-Game");

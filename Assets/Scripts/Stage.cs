@@ -24,6 +24,7 @@ public class Stage : MonoBehaviour
 
     public void PlayGame()
     {
+        AudioManager.instance.Play("Click");
         stageUIManager.LoadGame(stageNumber);
     }
 

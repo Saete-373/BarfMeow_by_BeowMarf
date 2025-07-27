@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CSS363-BarfMeow.sln"
+    "dotnet.defaultSolution": "BarfMeow_by_BeowMarf.sln"
 }

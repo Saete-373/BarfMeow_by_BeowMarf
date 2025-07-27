@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     private IEnumerator DelayNewGame(float delay)
     {
         Debug.Log("Starting a new game.");
+        AudioManager.instance.Play("Click");
 
         if (StageManager.Instance != null)
         {
@@ -35,6 +36,8 @@ public class MenuManager : MonoBehaviour
     private IEnumerator DelayLoadGame(float delay)
     {
         Debug.Log("Loading saved game.");
+        AudioManager.instance.Play("Click");
+
         SaveSystem.Load();
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("Stage");
@@ -48,6 +51,8 @@ public class MenuManager : MonoBehaviour
     private IEnumerator DelayExitGame(float delay)
     {
         Debug.Log("Exiting the game.");
+        AudioManager.instance.Play("Click");
+
         SaveSystem.Save();
 
         yield return new WaitForSeconds(delay);

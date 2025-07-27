@@ -57,11 +57,23 @@ public class Player_Controller : MonoBehaviour
     private Directions _facingDirection = Directions.NONE;
 
     private readonly string dishName = "999Dish";
-    private readonly Vector3 DISH_HANDPOSITION = new(0, -0.525f, 0);
-    private readonly Vector3 ITEM_HANDPOSITION = new(0, -0.313f, 0);
-    private readonly Vector3 DISH_TABLEPOSITION = new(0, -0.346f, 0);
+    private readonly List<Vector3> DISH_HANDPOSITION = new List<Vector3> {
+                                                            new(0, -0.254f, 0), // Down
+                                                            new(0, 0.049f, 0), // Up
+                                                            new(-0.392f, -0.188f, 0), // Left
+                                                            new(0.392f, -0.188f, 0) // Right
+                                                        };
+    private readonly List<Vector3> ITEM_HANDPOSITION = new List<Vector3> {
+                                                            new(0, -0.313f, 0), // Down
+                                                            new(0, 0, 0), // Up
+                                                            new(-0.349f, -0.313f, 0), // Left
+                                                            new(0.349f, -0.313f, 0) // Right
+                                                        };
+    private readonly Vector3 DISH_TABLEPOSITION = new(0, -0.056f, 0);
     private readonly Vector3 ITEM_TABLEPOSITION = new(0, -0.17f, 0);
     private bool isCooldownHand = false;
+    private Coroutine OnOpenRecipe;
+    private Coroutine OnOpenSetting;
 
     #endregion
 
@@ -138,8 +150,21 @@ public class Player_Controller : MonoBehaviour
 
         if (currentGesture != "recipe")
         {
+            if (OnOpenRecipe != null)
+            {
+                StopCoroutine(OnOpenRecipe);
+                OnOpenRecipe = null;
+            }
             GameplayUIManager.Instance._recipeManager.CloseRecipePanel();
+        }
 
+        if (currentGesture != "setting")
+        {
+            if (OnOpenSetting != null)
+            {
+                StopCoroutine(OnOpenSetting);
+                OnOpenSetting = null;
+            }
         }
 
 
@@ -151,12 +176,37 @@ public class Player_Controller : MonoBehaviour
                 // _moveDir.x = -1f;
                 if (isMovable)
                 {
+                    if (_handSlot.transform.childCount > 0)
+                    {
+                        Transform itemInHand = _handSlot.transform.GetChild(0);
+                        if (itemInHand.name.Contains(dishName))
+                        {
+                            itemInHand.localPosition = DISH_HANDPOSITION[2];
+                        }
+                        else
+                        {
+                            itemInHand.localPosition = ITEM_HANDPOSITION[2];
+                        }
+                    }
+
                     _moveDir = new Vector2(-1, 0);
                 }
                 break;
             case "right":
                 if (isMovable)
                 {
+                    if (_handSlot.transform.childCount > 0)
+                    {
+                        Transform itemInHand = _handSlot.transform.GetChild(0);
+                        if (itemInHand.name.Contains(dishName))
+                        {
+                            itemInHand.localPosition = DISH_HANDPOSITION[3];
+                        }
+                        else
+                        {
+                            itemInHand.localPosition = ITEM_HANDPOSITION[3];
+                        }
+                    }
                     _moveDir = new Vector2(1, 0);
                 }
                 break;
@@ -165,12 +215,38 @@ public class Player_Controller : MonoBehaviour
             case "straight":
                 if (isMovable)
                 {
+                    if (_handSlot.transform.childCount > 0)
+                    {
+                        Transform itemInHand = _handSlot.transform.GetChild(0);
+                        if (itemInHand.name.Contains(dishName))
+                        {
+                            itemInHand.localPosition = DISH_HANDPOSITION[0];
+                        }
+                        else
+                        {
+                            itemInHand.localPosition = ITEM_HANDPOSITION[0];
+                        }
+                    }
+
                     _moveDir = new Vector2(0, -1);
                 }
                 break;
             case "back":
                 if (isMovable)
                 {
+                    if (_handSlot.transform.childCount > 0)
+                    {
+                        Transform itemInHand = _handSlot.transform.GetChild(0);
+                        if (itemInHand.name.Contains(dishName))
+                        {
+                            itemInHand.localPosition = DISH_HANDPOSITION[1];
+                        }
+                        else
+                        {
+                            itemInHand.localPosition = ITEM_HANDPOSITION[1];
+                        }
+                    }
+
                     _moveDir = new Vector2(0, 1);
                 }
                 break;
@@ -178,7 +254,6 @@ public class Player_Controller : MonoBehaviour
             // Interaction with tables
             case "grab":
                 HandleGrabInteraction();
-
                 break;
 
             // Cooking interactions
@@ -186,98 +261,29 @@ public class Player_Controller : MonoBehaviour
                 HandleCookingInteraction();
                 break;
 
-            // Confirmation actions
+            // Delivery actions
             case "yes":
-                // Debug.Log("Yes Detected");
-                if (_tableDetector._currentTable == null)
-                    return;
-
-                currentTable = _tableDetector._currentTable;
-                // Debug.Log(currentTable.name);
-
-                if (currentTable == null)
-                    return;
-
-                if (currentTable.CompareTag("delivery"))
-                {
-                    // Debug.Log("Yes Detected 2");
-
-                    Transform dishTransform = _handSlot.transform.Find(dishName);
-
-                    if (dishTransform == null)
-                    {
-                        Debug.LogError("No dish in hand");
-                        return;
-                    }
-
-                    // Check if dish has content
-                    if (dishTransform.childCount == 0)
-                    {
-                        Debug.LogError("Dish is empty");
-                        return;
-                    }
-
-                    string foodInDishName = dishTransform.GetChild(0).name.Replace("(Clone)", "").Trim();
-
-                    Debug.Log("Food in dish: " + foodInDishName);
-
-                    RenderOrder renderOrder = _orderList.GetComponent<RenderOrder>();
-
-                    List<GameObject> foodOrderList = _orderList.GetComponent<RenderOrder>().foodOrderList;
-
-
-
-                    bool isOrderFound = foodOrderList
-                        .Any(order => order.transform.GetComponent<OrderEditor>().OrderName == foodInDishName);
-
-                    if (!isOrderFound)
-                    {
-                        Debug.LogError("No matching order found for the dish");
-                        return;
-                    }
-                    else
-                    {
-                        GameObject orderObj = foodOrderList.FirstOrDefault(order => order.transform.GetComponent<OrderEditor>().OrderName == foodInDishName);
-
-
-                        FoodObject order = orderObj.GetComponent<OrderEditor>().foodObject;
-
-                        FindObjectOfType<AudioManager>().Play("Cash-Out");
-
-                        GameplayManager.Instance.AddMoney(order.foodPrice);
-
-                        if (RenderOrder.Instance != null)
-                        {
-                            RenderOrder.Instance.RemoveOrder(orderObj);
-                        }
-                        else
-                        {
-                            Debug.LogError("RenderOrder.Instance is null!");
-                            Destroy(orderObj);
-                        }
-
-                        Destroy(dishTransform.gameObject);
-                    }
-
-                }
-
+                DeliveryFood();
                 break;
-            case "no":
 
+            case "no":
                 break;
 
             // Stop action
             case "stop":
-
                 _moveDir = Vector2.zero;
-
                 break;
+
+            // Open Recipe
             case "recipe":
-                GameplayUIManager.Instance._recipeManager.OpenRecipePanel();
+                OnOpenRecipe = StartCoroutine(DelayOpenRecipe(1f));
 
                 break;
+
+            // Open Setting
             case "setting":
-                GameplayUIManager.Instance.OpenSettingPanel();
+                OnOpenSetting = StartCoroutine(DelayOpenSetting(1f));
+
                 break;
         }
 
@@ -584,7 +590,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Set position
-        Vector3 spawnPosition = current_item == dishName ? DISH_HANDPOSITION : ITEM_HANDPOSITION;
+        Vector3 spawnPosition = current_item == dishName ? DISH_HANDPOSITION[0] : ITEM_HANDPOSITION[0];
         instantiatedItem.transform.localPosition = spawnPosition;
 
         StartCoroutine(DelayAction(1f));
@@ -605,12 +611,11 @@ public class Player_Controller : MonoBehaviour
         Transform itemOnHand = _handSlot.transform.GetChild(0);
 
         Vector3 placePosition = itemOnHand.CompareTag("dish") ? DISH_TABLEPOSITION : ITEM_TABLEPOSITION;
+        itemOnHand.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
         if (itemOnHand.CompareTag("dish"))
         {
             FindObjectOfType<AudioManager>().Play("Plate");
-
-
         }
         else
         {
@@ -634,7 +639,8 @@ public class Player_Controller : MonoBehaviour
 
         Transform itemOnTable = placeArea.transform.GetChild(0);
 
-        Vector3 placePosition = itemOnTable.CompareTag("dish") ? DISH_HANDPOSITION : ITEM_HANDPOSITION;
+        Vector3 placePosition = itemOnTable.CompareTag("dish") ? DISH_HANDPOSITION[0] : ITEM_HANDPOSITION[0];
+        itemOnTable.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
         if (itemOnTable.CompareTag("dish"))
         {
@@ -996,6 +1002,84 @@ public class Player_Controller : MonoBehaviour
     // ----------------------------------------------------------------------------------------------------------
     #endregion
 
+    #region Delicery Food
+    private void DeliveryFood()
+    {
+        // Debug.Log("Yes Detected");
+        if (_tableDetector._currentTable == null)
+            return;
+
+        currentTable = _tableDetector._currentTable;
+        // Debug.Log(currentTable.name);
+
+        if (currentTable == null)
+            return;
+
+        if (currentTable.CompareTag("delivery"))
+        {
+            // Debug.Log("Yes Detected 2");
+
+            Transform dishTransform = _handSlot.transform.Find(dishName);
+
+            if (dishTransform == null)
+            {
+                Debug.LogError("No dish in hand");
+                return;
+            }
+
+            // Check if dish has content
+            if (dishTransform.childCount == 0)
+            {
+                Debug.LogError("Dish is empty");
+                return;
+            }
+
+            string foodInDishName = dishTransform.GetChild(0).name.Replace("(Clone)", "").Trim();
+
+            Debug.Log("Food in dish: " + foodInDishName);
+
+            RenderOrder renderOrder = _orderList.GetComponent<RenderOrder>();
+
+            List<GameObject> foodOrderList = _orderList.GetComponent<RenderOrder>().foodOrderList;
+
+
+
+            bool isOrderFound = foodOrderList
+                .Any(order => order.transform.GetComponent<OrderEditor>().OrderName == foodInDishName);
+
+            if (!isOrderFound)
+            {
+                Debug.LogError("No matching order found for the dish");
+                return;
+            }
+            else
+            {
+                GameObject orderObj = foodOrderList.FirstOrDefault(order => order.transform.GetComponent<OrderEditor>().OrderName == foodInDishName);
+
+                FoodObject order = orderObj.GetComponent<OrderEditor>().foodObject;
+
+                FindObjectOfType<AudioManager>().Play("Cash-Out");
+
+                GameplayManager.Instance.AddMoney(order.foodPrice);
+
+                if (RenderOrder.Instance != null)
+                {
+                    RenderOrder.Instance.RemoveOrder(orderObj);
+                }
+                else
+                {
+                    Debug.LogError("RenderOrder.Instance is null!");
+                    Destroy(orderObj);
+                }
+
+                Destroy(dishTransform.gameObject);
+            }
+
+        }
+    }
+
+    #endregion
+
 
     #region Animation Logic
     private void CalculateFacingDetection()
@@ -1060,5 +1144,22 @@ public class Player_Controller : MonoBehaviour
     }
     #endregion
 
+
+    #region Delay Open UI
+    private IEnumerator DelayOpenRecipe(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        GameplayUIManager.Instance._recipeManager.OpenRecipePanel();
+        OnOpenRecipe = null;
+    }
+
+    private IEnumerator DelayOpenSetting(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        GameplayUIManager.Instance.OpenSettingPanel();
+        OnOpenSetting = null;
+    }
+
+    #endregion
 
 }

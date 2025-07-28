@@ -11,8 +11,6 @@ public class GameplayManager : MonoBehaviour
 
     // [Header("Dependencies")]
 
-
-
     #endregion
 
     #region Import Data
@@ -30,18 +28,14 @@ public class GameplayManager : MonoBehaviour
     public float CurrentTime;
     public int CurrentMoney;
     public bool isInit = false;
+    public Player_Controller playerController;
 
 
     #endregion
 
     #region Internal Data
-    private enum GameState
-    {
-        Playing,
-        HurryUp,
-        EndGame
-    }
-    private GameState currentGameState = GameState.Playing;
+
+    public GameState currentGameState = GameState.Playing;
     private int stageRent;
     private float maxPlayTime;
     private bool isPaused = true;
@@ -148,9 +142,9 @@ public class GameplayManager : MonoBehaviour
         isPaused = paused;
     }
 
+    public bool IsPaused() => isPaused;
+
     #endregion
-
-
 
     private void EndGameStateAction()
     {

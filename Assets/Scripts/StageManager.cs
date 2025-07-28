@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -8,10 +9,14 @@ public class StageManager : MonoBehaviour
     public int UnlockedStage = 1;
     public int AllMoney = 0;
     public List<StageObject> stageList;
+    public MenuSetting menuSetting;
 
     private const string CURRENT_STAGE_KEY = "CurrentStage";
     private const string UNLOCKED_STAGE_KEY = "UnlockedStage";
     private const string CURRENT_MONEY_KEY = "CurrentMoney";
+
+
+
 
     private void Awake()
     {
@@ -23,10 +28,16 @@ public class StageManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-
-
-
         SaveSystem.Load();
+
+        if (menuSetting != null)
+        {
+            menuSetting.LoadVolume();
+        }
+        else
+        {
+            Debug.LogWarning("MenuSetting is not assigned in StageManager.");
+        }
     }
 
     private void Start()
@@ -62,6 +73,7 @@ public class StageManager : MonoBehaviour
         PlayerPrefs.SetInt(CURRENT_STAGE_KEY, CurrentStage);
         PlayerPrefs.SetInt(UNLOCKED_STAGE_KEY, UnlockedStage);
         PlayerPrefs.SetInt(CURRENT_MONEY_KEY, AllMoney);
+
         PlayerPrefs.Save();
     }
 
@@ -83,5 +95,6 @@ public class StageManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveSystem.Save();
+
     }
 }

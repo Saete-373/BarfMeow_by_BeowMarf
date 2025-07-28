@@ -135,7 +135,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.2A
+  bundleVersion: 0.3A
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -281,7 +281,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: c78ef90a63ca6fb44b78940cefab738f, type: 3}
+      m_Icon: {fileID: 2800000, guid: 08711eee09e507341887374f9fdc43f9, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -567,7 +567,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: 
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -608,7 +609,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: CSS363-BarfMeow
   wsaImages: {}
-  metroTileShortName: CSS363-BarfMeow
+  metroTileShortName: BarfMeow
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

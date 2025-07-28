@@ -115,7 +115,13 @@ public class GameplayUIManager : MonoBehaviour
     {
         _settingPanel.SetActive(false);
         GameplayManager.Instance.SetPause(false);
+        TogglePlayerCanvas(true);
         AudioManager.instance.Play("Click");
+    }
+
+    public void TogglePlayerCanvas(bool isActive)
+    {
+        GameplayManager.Instance.playerController._canvas.SetActive(isActive);
     }
 
 
@@ -125,7 +131,6 @@ public class GameplayUIManager : MonoBehaviour
         StageManager.Instance.CurrentStage++;
 
         _endGamePanel.SetActive(true);
-
         _endgameAmountText.text = $"{currentMoney}";
         _endgameRentText.text = $"- {rent}";
         _endgameTotalText.text = $"{total}";

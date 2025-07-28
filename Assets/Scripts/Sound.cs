@@ -13,6 +13,7 @@ public class Sound
     public float pitch;
 
     public bool loop;
+    public bool BGM;
 
     [HideInInspector]
     public AudioSource source;

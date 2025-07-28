@@ -34,7 +34,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private GameObject _orderList;
     // [SerializeField] private GameplayUIManager _gameUIManager;
     [SerializeField] private GameObject _cloudEffect;
-    [SerializeField] private GameObject _canvas;
+    public GameObject _canvas;
 
     #endregion
 
@@ -73,13 +73,15 @@ public class Player_Controller : MonoBehaviour
     private readonly Vector3 ITEM_TABLEPOSITION = new(0, -0.17f, 0);
     private bool isCooldownHand = false;
     private Coroutine OnOpenRecipe;
-    private Coroutine OnOpenSetting;
+    // private Coroutine OnOpenSetting;
+    private Coroutine OnDestroyEndGame;
 
     #endregion
 
     private void Start()
     {
         HandleSceneSpecificLogic();
+        GameplayManager.Instance.playerController = this;
     }
 
     private void HandleSceneSpecificLogic()
@@ -102,9 +104,12 @@ public class Player_Controller : MonoBehaviour
     #region Tick 
     private void Update()
     {
+        if (!GameplayManager.Instance.IsPaused())
+        {
+            RecognizeGesture();
+        }
 
-        RecognizeGesture();
-        // GatherInput();
+        CheckEndGame();
 
     }
 
@@ -114,6 +119,28 @@ public class Player_Controller : MonoBehaviour
     }
 
     #endregion
+
+    private void CheckEndGame()
+    {
+        if (gameObject == null) return;
+
+        if (GameplayManager.Instance.currentGameState == GameState.EndGame)
+        {
+            if (OnDestroyEndGame == null)
+            {
+                OnDestroyEndGame = StartCoroutine(DelayDestroyPlayer(1f));
+            }
+
+            return;
+        }
+    }
+
+    private IEnumerator DelayDestroyPlayer(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnDestroyEndGame = null;
+        Destroy(gameObject);
+    }
 
     #region Time Logic
 
@@ -148,25 +175,16 @@ public class Player_Controller : MonoBehaviour
             return;
         }
 
-        if (currentGesture != "recipe")
+        if (currentGesture != "recipe" && currentGesture != "setting")
         {
             if (OnOpenRecipe != null)
             {
                 StopCoroutine(OnOpenRecipe);
                 OnOpenRecipe = null;
             }
+
             GameplayUIManager.Instance._recipeManager.CloseRecipePanel();
         }
-
-        if (currentGesture != "setting")
-        {
-            if (OnOpenSetting != null)
-            {
-                StopCoroutine(OnOpenSetting);
-                OnOpenSetting = null;
-            }
-        }
-
 
         // Debug.Log(currentGesture);
         switch (currentGesture)
@@ -271,7 +289,21 @@ public class Player_Controller : MonoBehaviour
 
             // Stop action
             case "stop":
+                if (_handSlot.transform.childCount > 0)
+                {
+                    Transform itemInHand = _handSlot.transform.GetChild(0);
+                    if (itemInHand.name.Contains(dishName))
+                    {
+                        itemInHand.localPosition = DISH_HANDPOSITION[0];
+                    }
+                    else
+                    {
+                        itemInHand.localPosition = ITEM_HANDPOSITION[0];
+                    }
+                }
+
                 _moveDir = Vector2.zero;
+
                 break;
 
             // Open Recipe
@@ -282,7 +314,10 @@ public class Player_Controller : MonoBehaviour
 
             // Open Setting
             case "setting":
-                OnOpenSetting = StartCoroutine(DelayOpenSetting(1f));
+                if (!GameplayManager.Instance.IsPaused())
+                {
+                    StartCoroutine(DelayOpenSetting(1f));
+                }
 
                 break;
         }
@@ -768,6 +803,8 @@ public class Player_Controller : MonoBehaviour
         Transform placeArea = saveTable.transform.Find("PlaceArea");
         Vector3 placePosition = ingredient.CompareTag("dish") ? DISH_TABLEPOSITION : ITEM_TABLEPOSITION;
 
+        ingredient.GetComponent<SpriteRenderer>().sortingOrder = 1;
+
         ingredient.transform.SetParent(placeArea);
         ingredient.transform.localPosition = placePosition;
 
@@ -791,6 +828,7 @@ public class Player_Controller : MonoBehaviour
         Transform placeArea = currentTable.transform.Find("PlaceArea");
         Vector3 placePosition = ingredient.CompareTag("dish") ? DISH_TABLEPOSITION : ITEM_TABLEPOSITION;
 
+
         ingredient.transform.SetParent(placeArea);
         ingredient.transform.localPosition = placePosition;
 
@@ -811,6 +849,7 @@ public class Player_Controller : MonoBehaviour
 
         Transform placeArea = currentTable.transform.Find("PlaceArea");
         Vector3 placePosition = ingredient.CompareTag("dish") ? DISH_TABLEPOSITION : ITEM_TABLEPOSITION;
+
 
         ingredient.transform.SetParent(placeArea);
         ingredient.transform.localPosition = placePosition;
@@ -953,6 +992,8 @@ public class Player_Controller : MonoBehaviour
         isMovable = false;
 
         Debug.Log("Ingredient: " + ingredient.name);
+
+
 
         if (currentTable.CompareTag("boil_station"))
         {
@@ -1150,14 +1191,19 @@ public class Player_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         GameplayUIManager.Instance._recipeManager.OpenRecipePanel();
+        GameplayUIManager.Instance.TogglePlayerCanvas(false);
         OnOpenRecipe = null;
     }
 
     private IEnumerator DelayOpenSetting(float delayTime)
     {
+
         yield return new WaitForSeconds(delayTime);
+
         GameplayUIManager.Instance.OpenSettingPanel();
-        OnOpenSetting = null;
+        GameplayUIManager.Instance.TogglePlayerCanvas(false);
+
+
     }
 
     #endregion

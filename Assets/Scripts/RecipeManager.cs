@@ -51,6 +51,7 @@ public class RecipeManager : MonoBehaviour
         gameObject.SetActive(false);
         nextRecipe.SetActive(false);
         prevRecipe.SetActive(false);
+        GameplayUIManager.Instance.TogglePlayerCanvas(true);
     }
 
     public void ApplyRenderCurrentPage(int gameStage = 0)

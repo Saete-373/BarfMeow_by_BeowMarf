@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 5b8c54052de43a1499983d4dd92f719a
+guid: 36c213010bbf0f94a94cead86d8f56c3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,91 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: FoodTable_0
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 739
-        width: 52
-        height: 35
-      alignment: 9
-      pivot: {x: 0.5, y: 0.42}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77fcc3dd71135ee4eac412cb0eabaac8
-      internalID: -2001656902
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FoodTable_1
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 526
-        width: 52
-        height: 35
-      alignment: 9
-      pivot: {x: 0.5, y: 0.42}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98ba07130b4fb464f9d327c09b53d79f
-      internalID: -268857793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FoodTable_2
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 310
-        width: 52
-        height: 35
-      alignment: 9
-      pivot: {x: 0.5, y: 0.42}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d52e46d41835424681ac35a52ae36e2
-      internalID: 752273266
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FoodTable_3
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 94
-        width: 52
-        height: 35
-      alignment: 9
-      pivot: {x: 0.5, y: 0.42}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dfe1493c62f4e254283cfc0f862384d7
-      internalID: -127931563
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -229,11 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      FoodTable_0: -2001656902
-      FoodTable_1: -268857793
-      FoodTable_2: 752273266
-      FoodTable_3: -127931563
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

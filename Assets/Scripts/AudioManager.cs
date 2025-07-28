@@ -4,14 +4,14 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private float testVolume;
-    [SerializeField] private int testIndex;
     public Sound[] sounds;
 
     public static AudioManager instance;
 
-    private int currentSoundIndex = 0;
-
+    private Sound[] bgmSounds;
+    private float[] bgmMaxVolumes;
+    private Sound[] sfxSounds;
+    private float[] sfxMaxVolumes;
 
     void Awake()
     {
@@ -37,10 +37,22 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        
+        bgmSounds = Array.FindAll(sounds, sound => sound.BGM);
 
-        // currentSoundIndex = testIndex;
-        // sounds[currentSoundIndex].source.Play();
+        bgmMaxVolumes = new float[bgmSounds.Length];
+        for (int i = 0; i < bgmSounds.Length; i++)
+        {
+            bgmMaxVolumes[i] = bgmSounds[i].volume;
+        }
+
+
+        sfxSounds = Array.FindAll(sounds, sound => !sound.BGM);
+
+        sfxMaxVolumes = new float[sfxSounds.Length];
+        for (int i = 0; i < sfxSounds.Length; i++)
+        {
+            sfxMaxVolumes[i] = sfxSounds[i].volume;
+        }
     }
 
     void DelayPlay(Sound sound, float delay)
@@ -90,6 +102,22 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Stop();
+    }
+
+    public void UpdateBGMVolume(float volume)
+    {
+        for (int i = 0; i < bgmSounds.Length; i++)
+        {
+            bgmSounds[i].source.volume = bgmMaxVolumes[i] * volume;
+        }
+    }
+
+    public void UpdateSFXVolume(float volume)
+    {
+        for (int i = 0; i < sfxSounds.Length; i++)
+        {
+            sfxSounds[i].source.volume = sfxMaxVolumes[i] * volume;
+        }
     }
 
     // Update is called once per frame

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6839495441310373966}
   - component: {fileID: 2939394736404109652}
+  - component: {fileID: 9110230382683605057}
   m_Layer: 0
   m_Name: Pink
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &9110230382683605057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350456650441592427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb3ff4322936314dbcfb29721098f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 2939394736404109652}

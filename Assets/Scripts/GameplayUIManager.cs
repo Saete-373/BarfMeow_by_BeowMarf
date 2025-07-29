@@ -162,6 +162,9 @@ public class GameplayUIManager : MonoBehaviour
         _canvas.SetActive(false);
         AudioManager.instance.Play("Click");
 
+        AudioManager.instance.StopSound("Game-BGM");
+        AudioManager.instance.Play("Menu-BGM", 0.5f);
+
         SceneManager.LoadScene("Stage");
 
     }

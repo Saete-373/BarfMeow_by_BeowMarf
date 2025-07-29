@@ -21,7 +21,7 @@ public class StationState : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -34,6 +34,7 @@ public class StationState : MonoBehaviour
             {
                 case State.Empty:
                     GetComponentInChildren<Animator>().Play("Empty");
+                    currentIngredient = null;
                     break;
                 case State.Cooking:
                     FindObjectOfType<AudioManager>().Play("Boiling");
@@ -110,10 +111,12 @@ public class StationState : MonoBehaviour
         {
             currentIngredient.name = "Waste";
             GetComponentInChildren<Animator>().Play("Fail");
+            AudioManager.instance.Play("Cooked-Fail");
         }
         else
         {
             GetComponentInChildren<Animator>().Play("Complete");
+            AudioManager.instance.Play("Cooked-Success");
         }
     }
 

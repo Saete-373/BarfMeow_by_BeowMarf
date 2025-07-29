@@ -34,6 +34,7 @@ public class RecipeManager : MonoBehaviour
     public void OpenRecipePanel()
     {
         gameObject.SetActive(true);
+        AudioManager.instance.Play("Open-Recipe");
         ApplyRenderCurrentPage();
     }
 

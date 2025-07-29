@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1378788728667772101}
   - component: {fileID: 5437899450475380861}
+  - component: {fileID: 7536408814508865324}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &7536408814508865324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784593324995372186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb3ff4322936314dbcfb29721098f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 5437899450475380861}

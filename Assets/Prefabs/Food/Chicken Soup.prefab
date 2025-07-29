@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8101353196213849106}
   - component: {fileID: 4021368819553994301}
+  - component: {fileID: 5881338379565338887}
   m_Layer: 0
   m_Name: Chicken Soup
   m_TagString: FoodLv3
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5881338379565338887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150678531467496755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb3ff4322936314dbcfb29721098f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 4021368819553994301}

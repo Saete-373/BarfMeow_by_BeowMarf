@@ -660,6 +660,7 @@ public class Player_Controller : MonoBehaviour
         itemOnHand.SetParent(placeArea.transform);
         itemOnHand.localPosition = placePosition;
         _plateList.GetComponent<RenderInPlate>().ClearPlate();
+        _plateList.SetActive(false);
         ClearHand();
 
         yield return new WaitForSeconds(1f);
@@ -686,6 +687,7 @@ public class Player_Controller : MonoBehaviour
             // detector.Add(ingredient.name);
 
             _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
+            _plateList.SetActive(true);
         }
         else
         {
@@ -716,6 +718,7 @@ public class Player_Controller : MonoBehaviour
         // detector.Add(ingredient.name);
 
         _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
+        _plateList.SetActive(true);
 
         StartCoroutine(DelayAction(0.5f));
     }
@@ -809,6 +812,7 @@ public class Player_Controller : MonoBehaviour
         ingredient.transform.localPosition = placePosition;
 
         _plateList.GetComponent<RenderInPlate>().ClearPlate();
+        _plateList.SetActive(false);
         ClearHand();
     }
 
@@ -833,6 +837,7 @@ public class Player_Controller : MonoBehaviour
         ingredient.transform.localPosition = placePosition;
 
         _plateList.GetComponent<RenderInPlate>().ClearPlate();
+        _plateList.SetActive(false);
         ClearHand();
     }
 
@@ -856,6 +861,7 @@ public class Player_Controller : MonoBehaviour
         ingredient.GetComponent<SpriteRenderer>().enabled = false;
 
         _plateList.GetComponent<RenderInPlate>().ClearPlate();
+        _plateList.SetActive(false);
         ClearHand();
     }
 
@@ -893,6 +899,7 @@ public class Player_Controller : MonoBehaviour
         // Debug.Log("Detector After Change: " + string.Join(", ", detector));
 
         _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
+        _plateList.SetActive(false);
 
         List<IngredientObject> dishIngredients = dish.GetComponent<IngredientDetector>().ingredientList;
         IngredientObject ingredientObj = dishIngredients.FirstOrDefault(obj => obj.ingredientName.Contains(oldIngredientName));
@@ -939,7 +946,7 @@ public class Player_Controller : MonoBehaviour
         instantiatedItem.name = newIngredientName;
 
         stationState.currentIngredient = instantiatedItem;
-
+        _plateList.SetActive(false);
         ClearInDish(dish);
     }
 
@@ -963,6 +970,7 @@ public class Player_Controller : MonoBehaviour
         detector.Add(newIngredientName);
 
         _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
+        _plateList.SetActive(false);
 
         List<IngredientObject> dishIngredients = dish.GetComponent<IngredientDetector>().ingredientList;
         IngredientObject ingredientObj = dishIngredients.FirstOrDefault(obj => obj.ingredientName.Contains(detector[0]));
@@ -1019,6 +1027,7 @@ public class Player_Controller : MonoBehaviour
         if (ingredient.name.Contains("Waste"))
         {
             dish.GetComponent<IngredientDetector>().SpawnWaste();
+            _plateList.SetActive(false);
         }
         else
         {
@@ -1031,6 +1040,7 @@ public class Player_Controller : MonoBehaviour
                 .Select(ingredientObj => ingredientObj.ingredientName).ToList();
 
             _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
+            _plateList.SetActive(true);
         }
 
         Transform placeArea = currentTable.transform.Find("PlaceArea");

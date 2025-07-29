@@ -399,7 +399,7 @@ MonoBehaviour:
   cameraDisplay: {fileID: 8431928504830086320}
   gestureText: {fileID: 2010752334755757650}
   fpsText: {fileID: 7994100849830477157}
-  serverUrl: http://localhost:5000/predict
+  serverUrl: https://barfmeowmodeldeploy-production.up.railway.app/predict
   captureInterval: 0.03
   currentGesture: none
   currentFps: 0
@@ -642,7 +642,7 @@ RectTransform:
   m_GameObject: {fileID: 2542075902490570062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12, y: 0.12, z: 1}
+  m_LocalScale: {x: 0.1125, y: 0.1125, z: 0.1125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 314063266491376945}

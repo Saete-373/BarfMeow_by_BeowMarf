@@ -9,14 +9,14 @@ public class GestureRecognizer : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private bool useFrontCamera = true;
-    [SerializeField] private int targetWidth = 640;
-    [SerializeField] private int targetHeight = 480;
-    [SerializeField] private int targetFrameRate = 30;
+    [SerializeField] private int targetWidth; // 640
+    [SerializeField] private int targetHeight; // 480
+    [SerializeField] private int targetFrameRate; // 30 FPS
     [SerializeField] private bool maintainAspectRatio = true;
 
     [Header("Capture Settings")]
-    [SerializeField] private int captureWidth = 640;
-    [SerializeField] private int captureHeight = 480;
+    [SerializeField] private int captureWidth; // 640
+    [SerializeField] private int captureHeight; // 480
 
     [Header("Display Settings")]
     [SerializeField] private RawImage cameraDisplay;
@@ -25,7 +25,7 @@ public class GestureRecognizer : MonoBehaviour
 
     [Header("Server Settings")]
     [SerializeField] private string serverUrl = "http://localhost:5000/predict";
-    [SerializeField] private float captureInterval = 0.05f;
+    [SerializeField] private float captureInterval;
 
 
     private WebCamTexture webCamTexture;
@@ -122,6 +122,8 @@ public class GestureRecognizer : MonoBehaviour
         if (cameraDisplay != null)
         {
             cameraDisplay.texture = webCamTexture;
+            cameraDisplay.rectTransform.localScale = new Vector3(-0.1125f, 0.1125f, 0.1125f);
+
         }
 
         // Create texture for capturing frames with fixed 4:3 aspect ratio
@@ -180,37 +182,14 @@ public class GestureRecognizer : MonoBehaviour
         return croppedPixels;
     }
 
+    private bool isRequesting = false;
+
     void Update()
     {
-        if (webCamTexture == null || !webCamTexture.isPlaying)
-            return;
+        if (webCamTexture == null || !webCamTexture.isPlaying) return;
 
-        // In the Update method:
-        if (cameraDisplay != null)
-        {
-            cameraDisplay.rectTransform.localEulerAngles = new Vector3(0, 180, 0);
-
-            // Use actual webcam dimensions and maintain aspect ratio
-            float aspectRatio = (float)webCamTexture.width / webCamTexture.height;
-            Vector2 displaySize = new Vector2(targetWidth, targetWidth / aspectRatio);
-            cameraDisplay.rectTransform.sizeDelta = displaySize;
-        }
-
-        // Update gesture text
-        if (gestureText != null)
-        {
-
-            gestureText.text = currentGesture;
-        }
-
-        if (fpsText != null)
-        {
-            fpsText.text = currentFps.ToString("F0");
-        }
-
-        // Capture frames at regular intervals
         timeSinceLastCapture += Time.deltaTime;
-        if (timeSinceLastCapture >= captureInterval)
+        if (timeSinceLastCapture >= captureInterval && !isRequesting)
         {
             timeSinceLastCapture = 0f;
             StartCoroutine(CaptureAndRecognize());
@@ -219,6 +198,9 @@ public class GestureRecognizer : MonoBehaviour
 
     IEnumerator CaptureAndRecognize()
     {
+        if (isRequesting) yield break;
+        isRequesting = true;
+
         // Don't try to capture if texture isn't ready
         if (webCamTexture.width <= 16 || webCamTexture.height <= 16)
         {
@@ -243,11 +225,11 @@ public class GestureRecognizer : MonoBehaviour
             Color32[] croppedPixels = CropWebcamTo4x3(webcamPixels, webCamTexture.width, webCamTexture.height);
 
             // Apply cropped pixels to capture texture
-            captureTexture.SetPixels32(webcamPixels);
+            captureTexture.SetPixels32(croppedPixels);
             captureTexture.Apply();
 
             // Convert texture to jpg with higher quality for WebGL
-            byte[] jpgData = captureTexture.EncodeToJPG(75);
+            byte[] jpgData = captureTexture.EncodeToJPG(50);
             string base64Image = Convert.ToBase64String(jpgData);
 
             // Create request data
@@ -294,6 +276,9 @@ public class GestureRecognizer : MonoBehaviour
                         {
                             currentGesture = "stop";
                         }
+
+                        gestureText.text = currentGesture;
+                        fpsText.text = Mathf.Round(currentFps).ToString();
                     }
                     // else
                     // {
@@ -310,6 +295,7 @@ public class GestureRecognizer : MonoBehaviour
                 Debug.LogError($"Request error: {request.error}");
             }
         }
+        isRequesting = false;
     }
 
     void OnDestroy()

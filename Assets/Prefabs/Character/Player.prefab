@@ -399,7 +399,7 @@ MonoBehaviour:
   cameraDisplay: {fileID: 8431928504830086320}
   gestureText: {fileID: 2010752334755757650}
   fpsText: {fileID: 7994100849830477157}
-  serverUrl: https://barfmeowmodeldeploy-production.up.railway.app/predict
+  serverUrl: http://localhost:5000/predict
   captureInterval: 0.03
   currentGesture: none
   currentFps: 0

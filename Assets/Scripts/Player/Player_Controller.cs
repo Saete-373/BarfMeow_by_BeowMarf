@@ -455,9 +455,7 @@ public class Player_Controller : MonoBehaviour
             {
                 case "cut_station":
                     BlinkToStation(currentTable.transform.position);
-                    // Debug.Log("Start Cutting Food");
                     StartCoroutine(CutFood(ingredientInHand));
-                    // Debug.Log("Cutting Food Completed");
 
                     break;
                 case "boil_station":
@@ -475,7 +473,6 @@ public class Player_Controller : MonoBehaviour
             }
 
             StartCoroutine(DelayAction(1f));
-            // Debug.Log("Cook Completed");
         }
         else if (itemOnTable != null && ingredientInHand == null && dishInHand != null)
         {
@@ -874,11 +871,9 @@ public class Player_Controller : MonoBehaviour
         isCooldownHand = true;
 
         FindObjectOfType<AudioManager>().Play("Cooking");
-        // Debug.Log("Recutting Food");
         _cloudEffect.SetActive(true);
         isMovable = false;
 
-        // _rb.velocity = Vector2.zero;
 
         yield return new WaitForSeconds(3f);
 
@@ -999,7 +994,7 @@ public class Player_Controller : MonoBehaviour
 
         isMovable = false;
 
-        Debug.Log("Ingredient: " + ingredient.name);
+
 
 
 
@@ -1023,14 +1018,18 @@ public class Player_Controller : MonoBehaviour
         isCooldownHand = false;
 
         isMovable = true;
+        Debug.Log("Ingredient: " + ingredient.name);
+        bool isWaste = ingredient.GetComponent<IngredientState>().ingredientObjList.All(obj => obj.ingredientName != ingredient.name);
 
-        if (ingredient.name.Contains("Waste"))
+        if (isWaste)
         {
+            Debug.Log("Is Waste" + isWaste);
             dish.GetComponent<IngredientDetector>().SpawnWaste();
             _plateList.SetActive(false);
         }
         else
         {
+            Debug.Log("Is Not Waste" + isWaste);
             IngredientObject ingredientObj = ingredient.GetComponent<IngredientState>().ingredientObjList
             .FirstOrDefault(obj => obj.ingredientName == ingredient.name);
 
@@ -1042,7 +1041,7 @@ public class Player_Controller : MonoBehaviour
             _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
             _plateList.SetActive(true);
         }
-
+        Debug.Log("Get Food Completed : " + ingredient.name);
         Transform placeArea = currentTable.transform.Find("PlaceArea");
         ClearTable(placeArea);
 

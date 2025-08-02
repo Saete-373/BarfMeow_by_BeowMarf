@@ -91,12 +91,6 @@ public class IngredientDetector : MonoBehaviour
                     )
                 );
 
-            Debug.Log("Has in Menu: " + hasInMenu);
-            // for (int i = 0; i < currentIngredientList.Count; i++)
-            // {
-            //     Debug.Log("Ingredient: " + currentIngredientList[i].ingredientName);
-            // }
-
             if (hasInMenu)
             {
                 // Get Menu Name

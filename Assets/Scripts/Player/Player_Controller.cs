@@ -899,19 +899,6 @@ public class Player_Controller : MonoBehaviour
 
         GameObject ingredientInDish = dish.transform.GetChild(0).gameObject;
         ingredientInDish.name = newIngredientName;
-
-
-
-
-        // Transform placeArea = currentTable.transform.Find("PlaceArea");
-        // Vector3 placePosition = ITEM_TABLEPOSITION;
-
-        // GameObject collectedIngredient = _items.Find(item => item.name == newIngredientName);
-        // GameObject ingredient = Instantiate(collectedIngredient, _handSlot.transform.position, Quaternion.identity, placeArea.transform);
-        // ingredient.transform.localPosition = placePosition;
-
-        // ClearTable(placeArea);
-
     }
 
     private void ReBoilFood(GameObject dish)

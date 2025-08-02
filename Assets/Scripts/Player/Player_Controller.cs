@@ -896,13 +896,11 @@ public class Player_Controller : MonoBehaviour
         _plateList.GetComponent<RenderInPlate>().RenderPlateUI(detector);
         _plateList.SetActive(false);
 
-        List<IngredientObject> dishIngredients = dish.GetComponent<IngredientDetector>().ingredientList;
-        IngredientObject ingredientObj = dishIngredients.FirstOrDefault(obj => obj.ingredientName.Contains(oldIngredientName));
 
-        ingredientObj.ingredientName = newIngredientName;
+        GameObject ingredientInDish = dish.transform.GetChild(0).gameObject;
+        ingredientInDish.name = newIngredientName;
 
-        dish.GetComponent<IngredientDetector>().ingredientList.RemoveAll(obj => obj.ingredientName == oldIngredientName);
-        dish.GetComponent<IngredientDetector>().ingredientList.Add(ingredientObj);
+
 
 
         // Transform placeArea = currentTable.transform.Find("PlaceArea");

@@ -87,7 +87,7 @@ public class Player_Controller : MonoBehaviour
     private void HandleSceneSpecificLogic()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("Current Scene Player: " + currentSceneName);
+        // Debug.Log("Current Scene Player: " + currentSceneName);
         if (currentSceneName != "Game")
         {
             _canvas.SetActive(false);
@@ -418,7 +418,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (_tableDetector._currentTable == null)
         {
-            Debug.Log("No table detected");
+            // Debug.Log("No table detected");
             return;
         }
 
@@ -476,6 +476,7 @@ public class Player_Controller : MonoBehaviour
         }
         else if (itemOnTable != null && ingredientInHand == null && dishInHand != null)
         {
+            if (currentTable.CompareTag("boil_station") && currentTable.GetComponent<StationState>().CheckState("cooking")) return;
             BlinkToStation(currentTable.transform.position);
             StartCoroutine(GetFood(itemOnTable, dishInHand));
             StartCoroutine(DelayAction(1f));
@@ -485,7 +486,7 @@ public class Player_Controller : MonoBehaviour
         {
             if (dishInHand.transform.childCount != 1)
             {
-                Debug.Log("Can repeatly cook with only 1 ingredient in dish");
+                // Debug.Log("Can repeatly cook with only 1 ingredient in dish");
                 return;
             }
 
@@ -526,10 +527,10 @@ public class Player_Controller : MonoBehaviour
         else
         {
 
-            Debug.Log("Do Nothing!");
-            Debug.Log("itemOnTable: " + (itemOnTable != null));
-            Debug.Log("ingredientInHand: " + (ingredientInHand != null));
-            Debug.Log("dishInHand: " + (dishInHand != null));
+            // Debug.Log("Do Nothing!");
+            // Debug.Log("itemOnTable: " + (itemOnTable != null));
+            // Debug.Log("ingredientInHand: " + (ingredientInHand != null));
+            // Debug.Log("dishInHand: " + (dishInHand != null));
         }
 
 
@@ -571,7 +572,7 @@ public class Player_Controller : MonoBehaviour
 
         if (minDistance >= 1f)
         {
-            Debug.Log("Too far from the station");
+            // Debug.Log("Too far from the station");
             return;
         }
 
@@ -797,7 +798,7 @@ public class Player_Controller : MonoBehaviour
         isCooldownHand = false;
 
         ingredient.name += "_Cut";
-        Debug.Log("Cutting Food Completed : " + ingredient.name);
+        // Debug.Log("Cutting Food Completed : " + ingredient.name);
         ingredient.GetComponent<SpriteRenderer>().enabled = true;
 
         Transform placeArea = saveTable.transform.Find("PlaceArea");
@@ -816,8 +817,13 @@ public class Player_Controller : MonoBehaviour
     private void BoilFood(GameObject ingredient)
     {
         StationState stationState = currentTable.GetComponent<StationState>();
-        if (stationState.CheckState("cooking")) return;
+        if (stationState.CheckState("cooking"))
+        {
+            Debug.Log("Already Cooking");
+            return;
+        }
 
+        Debug.Log("Boiling Food");
         stationState.SetState("cooking");
 
         ingredient.GetComponent<SpriteRenderer>().enabled = false;
@@ -978,10 +984,6 @@ public class Player_Controller : MonoBehaviour
         isCooldownHand = true;
 
         isMovable = false;
-
-
-
-
 
         if (currentTable.CompareTag("boil_station"))
         {

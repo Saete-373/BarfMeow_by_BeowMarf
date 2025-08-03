@@ -57,10 +57,13 @@ public class GameplayManager : MonoBehaviour
 
     public void InitGameData()
     {
+        Debug.Log("Initializing Game Data...");
         AudioManager.instance.StopSound("Menu-BGM");
 
         AudioManager.instance.Play("Game-BGM", 0.5f);
         AudioManager.instance.Play("Start-Game");
+
+        StageManager.Instance.CurrentStage++;
 
         currentGameStage = StageManager.Instance.CurrentStage + 1;
         StageObject stageObj = StageManager.Instance.stageList[currentGameStage - 1];
@@ -115,7 +118,6 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Over! Time's up!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             isPaused = true;
             currentGameState = GameState.EndGame;
 

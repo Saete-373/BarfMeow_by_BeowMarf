@@ -57,24 +57,24 @@ public class RecipeManager : MonoBehaviour
 
     public void ApplyRenderCurrentPage(int gameStage = 0)
     {
-        // //  Render without gameStage parameter
-        // if (gameStage < 1)
-        // {
-        //     Debug.Log("Rendering Recipe Page for Stage: " + currentGameStage);
-        //     if (StageManager.Instance != null && currentGameStage <= StageManager.Instance.stageList.Count)
-        //     {
-        //         RenderCurrentPage(currentGameStage);
+        //  Render without gameStage parameter
+        if (gameStage < 1)
+        {
+            Debug.Log("Rendering Recipe Page for Stage: " + currentGameStage);
+            if (StageManager.Instance != null && currentGameStage <= StageManager.Instance.stageList.Count)
+            {
+                RenderCurrentPage(currentGameStage);
 
-        //     }
-        //     else
-        //     {
-        //         Debug.LogWarning("Invalid stage data.");
-        //     }
-        // }
-        // else
-        // {
-        //     RenderCurrentPage(gameStage);
-        // }
+            }
+            else
+            {
+                Debug.LogWarning("Invalid stage data.");
+            }
+        }
+        else
+        {
+            RenderCurrentPage(gameStage);
+        }
 
         Debug.Log("Rendering Recipe Page for Stage: " + currentGameStage);
         if (StageManager.Instance != null && currentGameStage <= StageManager.Instance.stageList.Count)

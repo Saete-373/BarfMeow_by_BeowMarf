@@ -498,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Chicken Soup
+  m_text: Freshy Fish
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a1324f05869c4b249beff8142aed0ea7, type: 2}
   m_sharedMaterial: {fileID: -7540952566060576215, guid: a1324f05869c4b249beff8142aed0ea7, type: 2}

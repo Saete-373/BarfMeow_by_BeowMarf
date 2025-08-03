@@ -121,6 +121,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void TogglePlayerCanvas(bool isActive)
     {
+        if (GameplayManager.Instance.playerController == null) return;
         GameplayManager.Instance.playerController._canvas.SetActive(isActive);
     }
 
@@ -128,7 +129,7 @@ public class GameplayUIManager : MonoBehaviour
     // End Game ///////////////////////////////////////////////////////////////////////////////////
     public void SetEndGamePanel(int currentMoney, int rent, int total)
     {
-        StageManager.Instance.CurrentStage++;
+        StageManager.Instance.UnlockedStage++;
 
         _endGamePanel.SetActive(true);
         _endgameAmountText.text = $"{currentMoney}";
@@ -139,7 +140,6 @@ public class GameplayUIManager : MonoBehaviour
     // End Game Button Actions
     public void NextGameStage()
     {
-        Debug.Log("Proceeding to the next game stage.");
         _endGamePanel.SetActive(false);
         _canvas.SetActive(false);
         AudioManager.instance.Play("Click");
@@ -156,7 +156,6 @@ public class GameplayUIManager : MonoBehaviour
 
     public void BackToStage()
     {
-        Debug.Log("Returning to select stage.");
         _endGamePanel.SetActive(false);
         _settingPanel.SetActive(false);
         _canvas.SetActive(false);

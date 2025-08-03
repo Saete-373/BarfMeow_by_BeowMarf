@@ -2146,6 +2146,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2358978260681648661, guid: 314f6ba06590eb54380cb41793bb0346, type: 3}
+      propertyPath: menuSetting
+      value: 
+      objectReference: {fileID: 68977680}
+    - target: {fileID: 2358978260681648661, guid: 314f6ba06590eb54380cb41793bb0346, type: 3}
+      propertyPath: CurrentStage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2358978260681648661, guid: 314f6ba06590eb54380cb41793bb0346, type: 3}
+      propertyPath: UnlockedStage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8378338613175014412, guid: 314f6ba06590eb54380cb41793bb0346, type: 3}
       propertyPath: m_Name
       value: Stage Manager

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3786239515228330591}
   - component: {fileID: 5015173378051612802}
   m_Layer: 0
-  m_Name: Freshy Fish Barf
+  m_Name: Freshy Fish
   m_TagString: FoodLv2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

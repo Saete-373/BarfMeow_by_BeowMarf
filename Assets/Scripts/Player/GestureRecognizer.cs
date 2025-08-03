@@ -129,8 +129,6 @@ public class GestureRecognizer : MonoBehaviour
         // Create texture for capturing frames with fixed 4:3 aspect ratio
         captureTexture = new Texture2D(captureWidth, captureHeight, TextureFormat.RGB24, false);
 
-        Debug.Log($"Webcam initialized: {webCamTexture.width}x{webCamTexture.height}");
-        Debug.Log($"Capture texture fixed at: {captureWidth}x{captureHeight}");
     }
 
     private Color32[] CropWebcamTo4x3(Color32[] pixels, int webcamWidth, int webcamHeight)

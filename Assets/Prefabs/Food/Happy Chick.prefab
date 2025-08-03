@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7069990319514069288}
   - component: {fileID: 530745639192772341}
   m_Layer: 0
-  m_Name: Happy Chicky Breast
+  m_Name: Happy Chick
   m_TagString: FoodLv2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

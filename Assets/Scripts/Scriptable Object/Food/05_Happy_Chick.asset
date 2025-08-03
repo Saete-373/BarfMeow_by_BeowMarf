@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
-  m_Name: 05_Happy_Chicky_Breast
+  m_Name: 05_Happy_Chick
   m_EditorClassIdentifier: 
-  foodName: Happy Chicky Breast
+  foodName: Happy Chick
   foodLevel: Medium
   foodPrice: 8
   foodSprite: {fileID: 529181452, guid: 04277fa5c42e3854bab8b635662aed46, type: 3}

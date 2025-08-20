@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 07_Chicken_Cut
   m_EditorClassIdentifier: 
   ingredientName: Chicken_Cut
-  ingredientPart: {fileID: 6839495441310373966, guid: 89426eb9c8e94b343a665401b4ae258f, type: 3}
-  ingredientSprite: {fileID: -1705788478, guid: b0c103b3b25da9c45a58d8420ee4c456, type: 3}
-  cookedSprite: {fileID: -4210063, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 6839495441310373966, guid: 89426eb9c8e94b343a665401b4ae258f, type: 3}
+  imageUI: {fileID: -1705788478, guid: b0c103b3b25da9c45a58d8420ee4c456, type: 3}
+  imageInPlate: {fileID: -4210063, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

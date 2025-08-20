@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: cb9f45c8a288d4a4cba2c17a8e28c218, type: 2}
+  cookedNames:
+  - Gelatin_Boil

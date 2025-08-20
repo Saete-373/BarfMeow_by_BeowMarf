@@ -97,5 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: 84589a87652205249a5a09ea2bbf42e6, type: 2}
+  cookedList: []
+  cookedNames:
+  - Carrot_Cut

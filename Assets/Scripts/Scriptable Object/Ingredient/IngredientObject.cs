@@ -4,10 +4,9 @@ using UnityEngine;
 public class IngredientObject : ScriptableObject
 {
     public string ingredientName;
-    public Transform ingredientPart;
-    public Sprite ingredientSprite;
-    public Sprite cookedSprite;
-    // public Transform ingredientPrefab;
+    public Transform prefab;
+    public Sprite imageUI;
+    public Sprite imageInPlate;
 
 }
 

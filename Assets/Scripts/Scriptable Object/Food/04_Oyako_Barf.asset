@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
   m_Name: 04_Oyako_Barf
   m_EditorClassIdentifier: 
+  id: 0
   foodName: Oyako Barf
-  foodLevel: Medium
-  foodPrice: 8
   foodSprite: {fileID: -2144576304, guid: 6e8d19541f6374c49b70394841466707, type: 3}
+  prefab: {fileID: 4350137336005621577, guid: e2d43c30f7204a84184fbdd2d032d18c, type: 3}
+  spawnTime: 15
   orderMaxTime: 150
-  foodPrefab: {fileID: 4350137336005621577, guid: e2d43c30f7204a84184fbdd2d032d18c, type: 3}
+  level: medium
+  price: 12
   ingredients:
   - {fileID: 11400000, guid: 9a34fbe6f3d09dd46a207b6ba2e077a8, type: 2}
   - {fileID: 11400000, guid: 758720ee8dacc724fb9b505469645720, type: 2}

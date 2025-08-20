@@ -13,7 +13,7 @@ public class IngredientMethodUI : MonoBehaviour
     public void SetIngredientMethodUI(IngredientObject ingredient)
     {
 
-        _ingredientImage.sprite = ingredient.ingredientSprite;
+        _ingredientImage.sprite = ingredient.imageUI;
 
         _ingredientImage.SetNativeSize();
 

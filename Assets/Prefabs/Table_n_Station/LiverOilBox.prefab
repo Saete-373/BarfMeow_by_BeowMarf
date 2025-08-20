@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5573235286894471687}
   - component: {fileID: 1043298382931407923}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6012406563062976161}
   - component: {fileID: 5201232420389165381}
   - component: {fileID: 7706823134021768375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LiverOilBox
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -196,9 +196,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &7706823134021768375
 Rigidbody2D:
   serializedVersion: 4

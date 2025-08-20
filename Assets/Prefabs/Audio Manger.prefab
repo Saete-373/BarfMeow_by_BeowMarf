@@ -44,84 +44,116 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fed8aa217bfe94a98b35bbe25379c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testVolume: 0.3
-  testIndex: 3
   sounds:
   - name: Menu-BGM
     clip: {fileID: 8300000, guid: 22c199a649629c648990d633f59dd712, type: 3}
     volume: 0.1
     pitch: 1
-    loop: 0
+    loop: 1
+    BGM: 1
     source: {fileID: 0}
   - name: Game-BGM
     clip: {fileID: 8300000, guid: 6a3c9213b32df4b4c9bde26405133491, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
+    BGM: 1
     source: {fileID: 0}
   - name: New-Order
     clip: {fileID: 8300000, guid: 989b6dce734c0e54ebdcf9e802083d43, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Cash-Out
     clip: {fileID: 8300000, guid: bccd3bcd0125d294983b28eb46a2b5f1, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Cooking
     clip: {fileID: 8300000, guid: 82a4e18433f4be44d8807fdb31797c34, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Boiling
     clip: {fileID: 8300000, guid: 75b5464e9fa019241abf77882d15676a, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Open-Fridge
     clip: {fileID: 8300000, guid: 2aef06b95e35bf54092774a6d8793632, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Close-Fridge
     clip: {fileID: 8300000, guid: 1c253d58369e1ec4dba61c1c9647449e, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Trash-Bin
     clip: {fileID: 8300000, guid: 21bca32fc095d334e8f3fe2d79dc7535, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Plate
     clip: {fileID: 8300000, guid: 3e5547954f078b34ab1aec24912f96a8, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Click
-    clip: {fileID: 8300000, guid: 750cd7d25ae509349a69c5b4bffa76e0, type: 3}
+    clip: {fileID: 8300000, guid: a713e1c5ea5aeb745b68d3be93bce4eb, type: 3}
     volume: 0.2
     pitch: 1
     loop: 0
+    BGM: 0
     source: {fileID: 0}
   - name: Hurry-Up
     clip: {fileID: 8300000, guid: 26bc3594261957a41a517bc36a5d82d9, type: 3}
     volume: 0.2
     pitch: 1
     loop: 1
+    BGM: 0
     source: {fileID: 0}
   - name: Start-Game
     clip: {fileID: 8300000, guid: 86c5413873442b24983a85ace6e172d1, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
+    BGM: 0
+    source: {fileID: 0}
+  - name: Cooked-Success
+    clip: {fileID: 8300000, guid: 0313681719fab8d4f96e43e4d91858f7, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    BGM: 0
+    source: {fileID: 0}
+  - name: Cooked-Fail
+    clip: {fileID: 8300000, guid: 58fb51f57b6933b45bf5038189429c17, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    BGM: 0
+    source: {fileID: 0}
+  - name: Open-Recipe
+    clip: {fileID: 8300000, guid: a1abbe0f051910e4994236bfacf0dc4b, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    BGM: 0
     source: {fileID: 0}

@@ -12,6 +12,8 @@ public class OrderEditor : MonoBehaviour
     [SerializeField] Image _menuImage;
     [SerializeField] TMP_Text _orderNameText;
 
+    [SerializeField] private RenderOrder renderOrder;
+
 
     #endregion
 
@@ -23,12 +25,18 @@ public class OrderEditor : MonoBehaviour
     #endregion
 
     #region Public Data
+    public int OrderId;
     public string OrderName;
     public FoodObject foodObject;
     public int CurrentPrice;
     public List<Sprite> orderFrameVariants;
 
     #endregion
+
+    void Start()
+    {
+        renderOrder = transform.parent.GetComponent<RenderOrder>();
+    }
 
 
     void Update()
@@ -40,9 +48,9 @@ public class OrderEditor : MonoBehaviour
         // Check if time is up
         if (currentTime <= 0)
         {
-            if (RenderOrder.Instance != null)
+            if (renderOrder != null)
             {
-                RenderOrder.Instance.RemoveOrder(gameObject);
+                renderOrder.RemoveOrder(gameObject);
             }
             else
             {
@@ -53,14 +61,15 @@ public class OrderEditor : MonoBehaviour
         }
     }
 
-    public void SetFoodObject(FoodObject food)
+    public void SetFoodObject(FoodObject food, int id)
     {
         foodObject = food;
+        OrderId = id;
 
         OrderName = foodObject.foodName;
         _orderNameText.text = OrderName;
 
-        CurrentPrice = foodObject.foodPrice;
+        CurrentPrice = foodObject.price;
         currentTime = foodObject.orderMaxTime;
 
         _orderTimeBar.SetMaxOrderTime(currentTime);

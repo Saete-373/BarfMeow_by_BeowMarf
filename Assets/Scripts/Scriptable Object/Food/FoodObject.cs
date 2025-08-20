@@ -5,10 +5,11 @@ using UnityEngine;
 public class FoodObject : ScriptableObject
 {
     public string foodName;
-    public string foodLevel;
-    public int foodPrice;
     public Sprite foodSprite;
+    public GameObject prefab;
+    public float spawnTime;
     public float orderMaxTime;
-    public GameObject foodPrefab;
+    public string level;
+    public int price;
     public List<IngredientObject> ingredients;
 }

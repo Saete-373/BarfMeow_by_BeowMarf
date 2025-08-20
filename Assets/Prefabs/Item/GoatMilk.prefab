@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: 60aa478b04205ae47b0fb8a1134c5081, type: 2}
+  cookedNames:
+  - GoatMilk_Boil

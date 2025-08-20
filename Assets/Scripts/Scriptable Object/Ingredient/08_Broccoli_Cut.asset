@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 08_Broccoli_Cut
   m_EditorClassIdentifier: 
   ingredientName: Broccoli_Cut
-  ingredientPart: {fileID: 4858226992800364796, guid: 1387c6393686ab54bbc04b2563680a4f, type: 3}
-  ingredientSprite: {fileID: -1493396829, guid: 6a463d0fc2e86a943a5f4cadb7219718, type: 3}
-  cookedSprite: {fileID: -307250766, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}
+  prefab: {fileID: 4858226992800364796, guid: 1387c6393686ab54bbc04b2563680a4f, type: 3}
+  imageUI: {fileID: -1493396829, guid: 6a463d0fc2e86a943a5f4cadb7219718, type: 3}
+  imageInPlate: {fileID: -307250766, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}

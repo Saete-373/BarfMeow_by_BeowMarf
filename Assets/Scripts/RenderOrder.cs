@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RenderOrder : MonoBehaviour
 {
-    public static RenderOrder Instance;
-
+    public GameplayManager gameManager;
     #region public variables
     public List<GameObject> foodOrderList;
 
@@ -13,7 +12,6 @@ public class RenderOrder : MonoBehaviour
 
     #region Editor Data
     [Header("Dependencies")]
-    // [SerializeField] private GameplayManager gameManager;
     [SerializeField] private GameObject orderTemplate;
 
     [Header("Spawn Settings")]
@@ -26,19 +24,13 @@ public class RenderOrder : MonoBehaviour
     private readonly System.Random random = new();
     private bool isInitSpawn = false;
     private bool isSpawnable = true;
+    private int foodId = 0;
 
     #endregion
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+
     }
 
     public void RemoveOrder(GameObject orderObject)
@@ -63,18 +55,18 @@ public class RenderOrder : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("New-Order");
         isSpawnable = false;
         // Pick a random order
-        int randomIndex = random.Next(0, GameplayManager.Instance.foodOrderList.Count);
-        FoodObject order = GameplayManager.Instance.foodOrderList[randomIndex];
+        int randomIndex = random.Next(0, gameManager.foodOrderList.Count);
+        FoodObject order = gameManager.foodOrderList[randomIndex];
 
-        // Determine wait time based on difficulty
-        float waitTime = GetWaitTimeBasedOnDifficulty(order.foodLevel);
+        float waitTime = GetWaitTimeBasedOnDifficulty(order.level);
 
-        // Wait before spawning another order
         yield return new WaitForSeconds(waitTime);
+
+        foodId++;
 
         // Spawn the order
         GameObject spawnedOrder = Instantiate(orderTemplate, transform.position, Quaternion.identity, transform);
-        spawnedOrder.GetComponent<OrderEditor>().SetFoodObject(order);
+        spawnedOrder.GetComponent<OrderEditor>().SetFoodObject(order, foodId);
 
         foodOrderList.Add(spawnedOrder);
 
@@ -90,15 +82,17 @@ public class RenderOrder : MonoBehaviour
 
         isInitSpawn = true;
 
-        int randomIndex = random.Next(0, GameplayManager.Instance.foodOrderList.Count);
-        FoodObject order = GameplayManager.Instance.foodOrderList[randomIndex];
+        int randomIndex = random.Next(0, gameManager.foodOrderList.Count);
+        FoodObject order = gameManager.foodOrderList[randomIndex];
 
 
         // Wait a few seconds before starting to spawn orders
         yield return new WaitForSeconds(0.5f);
 
+        foodId++;
+
         GameObject spawnedOrder = Instantiate(orderTemplate, transform.position, Quaternion.identity, transform);
-        spawnedOrder.GetComponent<OrderEditor>().SetFoodObject(order);
+        spawnedOrder.GetComponent<OrderEditor>().SetFoodObject(order, foodId);
 
         foodOrderList.Add(spawnedOrder);
 
@@ -128,12 +122,13 @@ public class RenderOrder : MonoBehaviour
     void Update()
     {
         // Check if game has ended
-        if (GameplayManager.Instance.CurrentTime <= 0)
+        if (gameManager.CurrentTime <= 0)
         {
             StopAllCoroutines();
             Debug.Log("Time is up! No more orders will be spawned.");
+            isSpawnable = false;
         }
-        else if (GameplayManager.Instance.CurrentTime > 0 && isSpawnable)
+        else if (gameManager.CurrentTime > 0 && isSpawnable)
         {
             StartCoroutine(SpawnOrders());
         }

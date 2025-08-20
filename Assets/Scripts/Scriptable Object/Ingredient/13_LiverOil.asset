@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 13_LiverOil
   m_EditorClassIdentifier: 
   ingredientName: LiverOil
-  ingredientPart: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
-  ingredientSprite: {fileID: 82329795, guid: 7ec9fecbb698e3d41a1bb6da3c2f6ac3, type: 3}
-  cookedSprite: {fileID: 1418932542, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
+  imageUI: {fileID: 82329795, guid: 7ec9fecbb698e3d41a1bb6da3c2f6ac3, type: 3}
+  imageInPlate: {fileID: 1418932542, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

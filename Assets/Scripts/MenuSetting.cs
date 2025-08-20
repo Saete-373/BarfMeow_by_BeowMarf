@@ -16,8 +16,6 @@ public class MenuSetting : MonoBehaviour
     void Start()
     {
         StageManager.Instance.menuSetting = this;
-
-
     }
 
     public void OnChangeBGMVolume()

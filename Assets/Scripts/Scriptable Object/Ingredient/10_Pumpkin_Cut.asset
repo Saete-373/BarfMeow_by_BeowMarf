@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 10_Pumpkin_Cut
   m_EditorClassIdentifier: 
   ingredientName: Pumpkin_Cut
-  ingredientPart: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
-  ingredientSprite: {fileID: -1626642884, guid: 01110a99c2194e747ae37675042cab10, type: 3}
-  cookedSprite: {fileID: 617478079, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
+  imageUI: {fileID: -1626642884, guid: 01110a99c2194e747ae37675042cab10, type: 3}
+  imageInPlate: {fileID: 617478079, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

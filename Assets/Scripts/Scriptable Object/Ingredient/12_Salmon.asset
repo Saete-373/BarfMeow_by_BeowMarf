@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 12_Salmon
   m_EditorClassIdentifier: 
   ingredientName: Salmon
-  ingredientPart: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
-  ingredientSprite: {fileID: -74341010, guid: a2a2f77913cfc434a83e87e0febaed8b, type: 3}
-  cookedSprite: {fileID: 882509007, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
+  imageUI: {fileID: -74341010, guid: a2a2f77913cfc434a83e87e0febaed8b, type: 3}
+  imageInPlate: {fileID: 882509007, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

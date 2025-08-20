@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1406117102092671908}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlaceArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 7806934550885786531}
   - component: {fileID: 8432680485833026449}
   - component: {fileID: 7825913574409766053}
-  m_Layer: 0
+  - component: {fileID: 9042287535434332632}
+  m_Layer: 3
   m_Name: KnifeStation
   m_TagString: cut_station
   m_Icon: {fileID: 0}
@@ -66,6 +67,7 @@ Transform:
   - {fileID: 1406117102092671908}
   - {fileID: 7860915944360315724}
   - {fileID: 768199499192816335}
+  - {fileID: 382385634032116408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7806934550885786531
@@ -145,9 +147,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &7825913574409766053
 Rigidbody2D:
   serializedVersion: 4
@@ -175,6 +177,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9042287535434332632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053398136255446810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f604d6d8c35a054396e8b83733b8abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentIngredientName: 
+  player: {fileID: 0}
+  cookingTime: 5
+  isLockMove: 1
+  animator: {fileID: 0}
+  _cloudEffect: {fileID: 1864974936600472370}
+  currentStationState: 0
 --- !u!1 &3929203909760755164
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 768199499192816335}
   - component: {fileID: 6250769658312002988}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: KitchenwareSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7860915944360315724}
   - component: {fileID: 573573811307409039}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,3 +364,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1001 &8766593100753537999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7384820496800963828}
+    m_Modifications:
+    - target: {fileID: 6937946033806500093, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_Name
+      value: CloudEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6937946033806500093, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+--- !u!4 &382385634032116408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9000356233797724535, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+  m_PrefabInstance: {fileID: 8766593100753537999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1864974936600472370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6937946033806500093, guid: 7f14f0b85156c8f48897d827e5427cb1, type: 3}
+  m_PrefabInstance: {fileID: 8766593100753537999}
+  m_PrefabAsset: {fileID: 0}

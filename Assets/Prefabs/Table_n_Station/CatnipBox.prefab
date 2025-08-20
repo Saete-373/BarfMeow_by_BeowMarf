@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8096454701167831134}
   - component: {fileID: 3334597938091318888}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8188394270065099004}
   - component: {fileID: 7555605467382043454}
   - component: {fileID: 4840659204312503711}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CatnipBox
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -196,9 +196,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &4840659204312503711
 Rigidbody2D:
   serializedVersion: 4

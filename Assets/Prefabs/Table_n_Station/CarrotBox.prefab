@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6317736207824250079}
   - component: {fileID: 7937121625019110300}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2253773848282435087}
   - component: {fileID: 5585408275852168275}
   - component: {fileID: 5208614185905342705}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CarrotBox
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -196,9 +196,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &5208614185905342705
 Rigidbody2D:
   serializedVersion: 4

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 09_Catnip
   m_EditorClassIdentifier: 
   ingredientName: Catnip
-  ingredientPart: {fileID: 4858226992800364796, guid: 1387c6393686ab54bbc04b2563680a4f, type: 3}
-  ingredientSprite: {fileID: 382436447, guid: b2b3efbe528bb72409b3ee6075a15893, type: 3}
-  cookedSprite: {fileID: -1476594167, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}
+  prefab: {fileID: 4858226992800364796, guid: 1387c6393686ab54bbc04b2563680a4f, type: 3}
+  imageUI: {fileID: 382436447, guid: b2b3efbe528bb72409b3ee6075a15893, type: 3}
+  imageInPlate: {fileID: -1476594167, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}

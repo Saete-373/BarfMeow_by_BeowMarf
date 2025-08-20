@@ -32,34 +32,34 @@ public class StageUIManager : MonoBehaviour
     {
 
     }
-    // 0 1 2 3 4 
-    //         5
+
     public void RenderStageList()
     {
-        for (int i = 0; i < stageCount; i++)
+        for (int i = 1; i <= stageCount; i++)
         {
-            int stageNumber = i + 1;
-
-            // ปลดล็อกด่านที่น้อยกว่าหรือเท่ากับ UnlockedStage
-            if (stageNumber <= StageManager.Instance.UnlockedStage)
+            if (i <= StageManager.Instance.CurrentStage && !StageManager.Instance.IsStageComplete)
             {
-                StageList[i].GetComponent<Stage>().SetUnlocked(true);
+                StageList[i - 1].GetComponent<Stage>().SetUnlocked(true);
             }
-            else if (stageNumber == StageManager.Instance.UnlockedStage + 1 &&
-                     StageManager.Instance.CurrentStage == StageManager.Instance.UnlockedStage)
+            else if (i == StageManager.Instance.CurrentStage && StageManager.Instance.IsStageComplete)
             {
-                StageList[i].GetComponent<Stage>().SetUnlocked(true);
+                StageList[i - 1].GetComponent<Stage>().SetUnlocked(true);
+                if (i < stageCount)
+                {
+                    StageList[i].GetComponent<Stage>().SetUnlocked(true);
+                    i++;
+                }
             }
-            else
+            else if (i > StageManager.Instance.CurrentStage)
             {
-                StageList[i].GetComponent<Stage>().SetUnlocked(false);
+                StageList[i - 1].GetComponent<Stage>().SetUnlocked(false);
             }
         }
     }
 
     public void BackToMenu()
     {
-        Debug.Log("Returning to select stage.");
+        // Debug.Log("Returning to select stage.");
         AudioManager.instance.Play("Click");
 
         SceneManager.LoadScene("Menu");
@@ -67,9 +67,11 @@ public class StageUIManager : MonoBehaviour
 
     public void LoadGame(int gameStage)
     {
-        Debug.Log("Starting the game for stage: " + gameStage);
+        // Debug.Log("Starting the game for stage: " + gameStage);
 
-        StageManager.Instance.CurrentStage = gameStage - 1;
+        StageManager.Instance.CurrentStage = gameStage;
+        StageManager.Instance.UnlockedStage = 0;
+        StageManager.Instance.IsStageComplete = false;
         SceneManager.LoadScene("Game");
     }
 

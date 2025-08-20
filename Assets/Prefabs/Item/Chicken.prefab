@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: 89889db92979cb6429bfccf9d5dd1482, type: 2}
-  - {fileID: 11400000, guid: 006479fbeeabf0a45b83e4f046a302cf, type: 2}
-  - {fileID: 11400000, guid: 9a34fbe6f3d09dd46a207b6ba2e077a8, type: 2}
+  cookedNames:
+  - Chicken_Cut
+  - Chicken_Boil
+  - Chicken_Cut_Boil

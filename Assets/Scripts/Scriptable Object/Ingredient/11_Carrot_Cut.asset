@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 11_Carrot_Cut
   m_EditorClassIdentifier: 
   ingredientName: Carrot_Cut
-  ingredientPart: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
-  ingredientSprite: {fileID: -424696084, guid: 9d37a15d08ce1964993f612762255025, type: 3}
-  cookedSprite: {fileID: 1005120062, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 1378788728667772101, guid: 2af39d9ae434c5c40a384a462d6c2a55, type: 3}
+  imageUI: {fileID: -424696084, guid: 9d37a15d08ce1964993f612762255025, type: 3}
+  imageInPlate: {fileID: 1005120062, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

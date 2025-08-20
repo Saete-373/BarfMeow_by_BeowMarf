@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
   m_Name: 03_Tuna_Soup
   m_EditorClassIdentifier: 
+  id: 0
   foodName: Tuna Soup
-  foodLevel: Easy
-  foodPrice: 5
   foodSprite: {fileID: 1291328389, guid: 53ed79161c7dc814195df45e21e760a4, type: 3}
+  prefab: {fileID: 7688508470476920604, guid: 7815d9d0e26334049bd9320e1557e5bc, type: 3}
+  spawnTime: 10
   orderMaxTime: 120
-  foodPrefab: {fileID: 7688508470476920604, guid: 7815d9d0e26334049bd9320e1557e5bc, type: 3}
+  level: medium
+  price: 8
   ingredients:
   - {fileID: 11400000, guid: 5a5af32f680f7b44ebd9ba27e45b0229, type: 2}

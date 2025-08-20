@@ -5,85 +5,67 @@ using UnityEngine.UI;
 
 public class RenderInPlate : MonoBehaviour
 {
-    #region Scriptable Objects
-    public IngredientObjectList ingredientList;
-
-
-    #endregion
-
-    #region Editor Data
-
-    #endregion
-
-    #region Public Data
-    public List<string> targetIngredients;
-
-    #endregion
-
     #region Instance Data
-    [Header("UI Prefabs")]
-    [SerializeField] private GameObject _platePrefab;
+    [Header("UI Template")]
+    [SerializeField] private GameObject plateTemplate;
+    [Space]
 
     #endregion
+
 
     #region Internal Data
-    private Dictionary<string, Sprite> inPlateIngredients = new();
-    private List<string> inPlateIngredientNames = new();
+    [Header("Plate Objects")]
+    [SerializeField] private List<GameObject> plates;
 
+    [Header("From Inventory")]
+    [SerializeField] private List<string> inPlateIngredientNames = new();
+    private Dictionary<string, Sprite> inPlateIngredients = new();
 
     #endregion
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        inPlateIngredients = ingredientList.data
+        inPlateIngredients = StageManager.Instance.ingredientList.data
             .Where(ingredient => ingredient.ingredientName != "Waste")
-            .ToDictionary(ingredient => ingredient.ingredientName, ingredient => ingredient.cookedSprite);
+            .ToDictionary(ingredient => ingredient.ingredientName, ingredient => ingredient.imageInPlate);
 
         inPlateIngredientNames = inPlateIngredients.Keys.ToList();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void RenderPlateUI(List<string> newIngredients)
     {
-        ClearPlate();
+        // Debug.Log("RenderPlateUI called with ingredients: " + string.Join(", ", newIngredients));
 
-        Debug.Log("RenderPlateUI called with ingredients: " + string.Join(", ", newIngredients));
-        targetIngredients = newIngredients;
-
-        bool hasInvalidIngredient = newIngredients.Any(newIngredient => !inPlateIngredientNames.Any(inPlateName => inPlateName == newIngredient));
+        bool hasInvalidIngredient = newIngredients.Any(newIngredient => !inPlateIngredientNames.Any(name => name == newIngredient));
 
         if (!hasInvalidIngredient)
         {
-            foreach (string ingredient in newIngredients)
+            for (int i = 0; i < plates.Count; i++)
             {
-                GameObject plateUI = Instantiate(_platePrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
-                plateUI.transform.GetChild(0).GetComponent<Image>().sprite = inPlateIngredients[ingredient];
-                Debug.Log($"Assigned sprite for ingredient: {inPlateIngredients[ingredient].name}");
-
-
+                if (i < newIngredients.Count)
+                {
+                    plates[i].SetActive(true);
+                    plates[i].transform.GetChild(0).GetComponent<Image>().sprite = inPlateIngredients[newIngredients[i]];
+                    continue;
+                }
+                plates[i].SetActive(false);
             }
         }
         else
         {
             Debug.LogWarning("Some Ingredient not in List");
-
+            ClearPlate();
         }
 
     }
 
     public void ClearPlate()
     {
-        while (transform.childCount > 0)
+        foreach (GameObject plate in plates)
         {
-            Transform child = transform.GetChild(0);
-            child.SetParent(null);
-            Destroy(child.gameObject);
+            plate.SetActive(false);
         }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 15_Gelatin_Boil
   m_EditorClassIdentifier: 
   ingredientName: Gelatin_Boil
-  ingredientPart: {fileID: 4768444212578948594, guid: ff657fea5c467c04089a51c914f3a331, type: 3}
-  ingredientSprite: {fileID: 416668844, guid: 6784f9e0f0e206742b7cca463e457f2a, type: 3}
-  cookedSprite: {fileID: -332120961, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 4768444212578948594, guid: ff657fea5c467c04089a51c914f3a331, type: 3}
+  imageUI: {fileID: 416668844, guid: 6784f9e0f0e206742b7cca463e457f2a, type: 3}
+  imageInPlate: {fileID: -332120961, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

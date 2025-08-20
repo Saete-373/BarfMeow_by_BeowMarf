@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8618397143468650736}
   - component: {fileID: 978891819435586694}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DishStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 862762954714536443}
   - component: {fileID: 2875928702005856775}
   - component: {fileID: 603920548864319996}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DishBox
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -197,9 +197,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &603920548864319996
 Rigidbody2D:
   serializedVersion: 4
@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9147898653356409208}
   - component: {fileID: 5397776271648911460}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

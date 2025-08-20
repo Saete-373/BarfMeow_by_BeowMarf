@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7625400398253556801}
   - component: {fileID: -7969159960203099662}
   - component: {fileID: 6661837517199908648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Table
   m_TagString: table
   m_Icon: {fileID: 0}
@@ -113,9 +113,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &6661837517199908648
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6733443236306923893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlaceArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6908824665516846310}
   - component: {fileID: 2253765132373120197}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

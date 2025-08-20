@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: 5a5af32f680f7b44ebd9ba27e45b0229, type: 2}
-  - {fileID: 11400000, guid: 3c315ac6d1bea7f4796f04a0b1f48c7a, type: 2}
+  cookedNames:
+  - TunaCan_Freeze
+  - TunaCan_Boil

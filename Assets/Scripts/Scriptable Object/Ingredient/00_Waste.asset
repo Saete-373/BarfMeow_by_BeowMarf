@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: 00_Waste
   m_EditorClassIdentifier: 
   ingredientName: Waste
-  ingredientPart: {fileID: 3873479295230751450, guid: 670cf7457a5efa646a005d17dc2dc45a, type: 3}
+  prefab: {fileID: 3873479295230751450, guid: 670cf7457a5efa646a005d17dc2dc45a, type: 3}
+  imageUI: {fileID: 0}
+  imageInPlate: {fileID: 0}

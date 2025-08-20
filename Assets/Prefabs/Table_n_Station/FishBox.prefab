@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5811972393949162595}
   - component: {fileID: 7843770199635220564}
   - component: {fileID: 5982828566613195925}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FishBox
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -112,9 +112,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &5982828566613195925
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8253976115621110811}
   - component: {fileID: 1050345177530776342}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

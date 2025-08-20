@@ -1,31 +1,16 @@
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Tutorial")]
+    [SerializeField] private GameObject tutorialPanel;
+
     public void NewGame()
     {
-        StartCoroutine(DelayNewGame(1f));
-    }
-
-    private IEnumerator DelayNewGame(float delay)
-    {
-        Debug.Log("Starting a new game.");
-        AudioManager.instance.Play("Click");
-
-        if (StageManager.Instance != null)
-        {
-            StageManager.Instance.SetNewGameStage();
-        }
-        else
-        {
-            Debug.LogError("StageManager.Instance is null!");
-        }
-
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("Game");
-
+        tutorialPanel.SetActive(true);
     }
 
     public void LoadGame()
@@ -35,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator DelayLoadGame(float delay)
     {
-        Debug.Log("Loading saved game.");
+        // Debug.Log("Loading saved game.");
         AudioManager.instance.Play("Click");
 
         SaveSystem.Load();
@@ -50,7 +35,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator DelayExitGame(float delay)
     {
-        Debug.Log("Exiting the game.");
+        // Debug.Log("Exiting the game.");
         AudioManager.instance.Play("Click");
 
         SaveSystem.Save();

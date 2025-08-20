@@ -6,7 +6,7 @@ public class LoadingNextStage : MonoBehaviour
     void Start()
     {
         Debug.Log("LoadingNextStage Awake called");
-        GameplayManager.Instance.isInit = false;
+        // GameplayManager.Instance.isInit = false;
         SceneManager.LoadScene("Game");
     }
 

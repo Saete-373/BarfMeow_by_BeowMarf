@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
   m_Name: 05_Happy_Chick
   m_EditorClassIdentifier: 
+  id: 0
   foodName: Happy Chick
-  foodLevel: Medium
-  foodPrice: 8
   foodSprite: {fileID: 529181452, guid: 04277fa5c42e3854bab8b635662aed46, type: 3}
-  orderMaxTime: 150
-  foodPrefab: {fileID: 2122971775469189765, guid: 6c0097f505731984591b7a349122fde6, type: 3}
+  prefab: {fileID: 2122971775469189765, guid: 6c0097f505731984591b7a349122fde6, type: 3}
+  spawnTime: 10
+  orderMaxTime: 120
+  level: medium
+  price: 8
   ingredients:
   - {fileID: 11400000, guid: 9a34fbe6f3d09dd46a207b6ba2e077a8, type: 2}
   - {fileID: 11400000, guid: c077aacf8549b5d4880e815bb154f628, type: 2}

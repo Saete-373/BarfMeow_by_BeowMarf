@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 16_GoatMilk_Boil
   m_EditorClassIdentifier: 
   ingredientName: GoatMilk_Boil
-  ingredientPart: {fileID: 4768444212578948594, guid: ff657fea5c467c04089a51c914f3a331, type: 3}
-  ingredientSprite: {fileID: 1519512812, guid: 4ceb568568f53d448ac08f9384373e03, type: 3}
-  cookedSprite: {fileID: 1450272119, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}
+  prefab: {fileID: 4768444212578948594, guid: ff657fea5c467c04089a51c914f3a331, type: 3}
+  imageUI: {fileID: 1519512812, guid: 4ceb568568f53d448ac08f9384373e03, type: 3}
+  imageInPlate: {fileID: 1450272119, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}

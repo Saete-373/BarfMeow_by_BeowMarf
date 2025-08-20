@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5054169038012505740}
   - component: {fileID: 9130638420869605226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4927564942211512910}
   - component: {fileID: 7296571903866462468}
   - component: {fileID: 966122872802815307}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bin
   m_TagString: table
   m_Icon: {fileID: 0}
@@ -196,9 +196,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3124687}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &966122872802815307
 Rigidbody2D:
   serializedVersion: 4

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2673550347801275511}
   - component: {fileID: 236504747326399829}
-  - component: {fileID: 5254387298132488761}
+  - component: {fileID: 88788287433214715}
   m_Layer: 0
   m_Name: 999Dish
   m_TagString: dish
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5254387298132488761
+--- !u!114 &88788287433214715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2213957144664968288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3cc78e8c5f792b4191e19e2d9e02e6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 218de4741a3d2494d9a71620caadbc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodList: {fileID: 11400000, guid: 7947abca1c0926346bb8e637160d57af, type: 2}
-  baseIngredientList: {fileID: 11400000, guid: b2abe0ce0e40bf549836820d53d54b28, type: 2}
-  ingredientList: []
-  whiteLiquidList: {fileID: 11400000, guid: b71eb6d516fe2af4c944d665c9bf6fd9, type: 2}
-  wasteIngredient: {fileID: 11400000, guid: 9463505bdb4a26d4f959e25091bebaa6, type: 2}
-  _maxIngredients: 4
+  CurrentFood: {fileID: 0}
+  saveItems: []
+  playerController: {fileID: 0}
+  wastePosition: {x: 0, y: -0.017, z: 0}
+  milkPosition: {x: 0, y: -0.016, z: 0}

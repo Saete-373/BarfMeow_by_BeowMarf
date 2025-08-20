@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b1cb9a15c3a8f4591c0498760be362, type: 3}
   m_Name: 08_Chicken_Soup
   m_EditorClassIdentifier: 
+  id: 0
   foodName: Chicken Soup
-  foodLevel: Hard
-  foodPrice: 12
   foodSprite: {fileID: 2009709696, guid: d14a91cc38496764b9f50b4c53d97361, type: 3}
+  prefab: {fileID: 9150678531467496755, guid: b2e116fa009290243a8bcfcc26da9271, type: 3}
+  spawnTime: 20
   orderMaxTime: 180
-  foodPrefab: {fileID: 9150678531467496755, guid: b2e116fa009290243a8bcfcc26da9271, type: 3}
+  level: hard
+  price: 20
   ingredients:
   - {fileID: 11400000, guid: 89889db92979cb6429bfccf9d5dd1482, type: 2}
   - {fileID: 11400000, guid: 84589a87652205249a5a09ea2bbf42e6, type: 2}

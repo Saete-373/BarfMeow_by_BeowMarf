@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb37902b2b6a1fb49bf4815c219e308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObjList:
-  - {fileID: 11400000, guid: d5f40ed472a9b644bbd73308358639df, type: 2}
-  - {fileID: 11400000, guid: c0d4f06529588c1408d76c3b458c8e19, type: 2}
+  cookedNames:
+  - Fish_Cut
+  - Fish_Cut_Cut

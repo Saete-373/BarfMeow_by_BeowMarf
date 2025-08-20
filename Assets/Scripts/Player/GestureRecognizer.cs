@@ -2,43 +2,43 @@ using System;
 using System.Collections;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
+using NativeWebSocket;
+
 public class GestureRecognizer : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private bool useFrontCamera = true;
-    [SerializeField] private int targetWidth; // 640
-    [SerializeField] private int targetHeight; // 480
-    [SerializeField] private int targetFrameRate; // 30 FPS
-    [SerializeField] private bool maintainAspectRatio = true;
+    [SerializeField] private int targetWidth = 640;
+    [SerializeField] private int targetHeight = 480;
+    [SerializeField] private int targetFrameRate = 30;
 
     [Header("Capture Settings")]
-    [SerializeField] private int captureWidth; // 640
-    [SerializeField] private int captureHeight; // 480
+    [SerializeField] private int captureWidth = 640;
+    [SerializeField] private int captureHeight = 480;
 
     [Header("Display Settings")]
+    public GameplayManager gpManager;
     [SerializeField] private RawImage cameraDisplay;
     [SerializeField] private TMP_Text gestureText;
     [SerializeField] private TMP_Text fpsText;
 
     [Header("Server Settings")]
-    [SerializeField] private string serverUrl = "http://localhost:5000/predict";
-    [SerializeField] private float captureInterval;
-
+    [SerializeField] private string serverUrl = "ws://localhost:8000/ws"; // WebSocket endpoint
+    [SerializeField] private float captureInterval = 0.1f;
 
     private WebCamTexture webCamTexture;
     private Texture2D captureTexture;
 
     private float timeSinceLastCapture = 0f;
+    private WebSocket websocket;
+    private bool isRequesting = false;
 
     [Serializable]
     private class GestureResponse
     {
         public string gesture;
-        public float confidence;
-        public string error;
         public float fps;
     }
 
@@ -52,22 +52,29 @@ public class GestureRecognizer : MonoBehaviour
     public string currentGesture = "none";
     public float currentFps = 0.0f;
 
-    void Start()
+    private void Awake()
+    {
+        gpManager = GetComponent<PlayerController>().gameplayManager;
+        cameraDisplay = gpManager.cameraDisplay;
+        gestureText = gpManager.gestureText;
+        fpsText = gpManager.fpsText;
+    }
+
+    async void Start()
     {
         StartCamera();
+        await ConnectWebSocket();
     }
 
     void StartCamera()
     {
         WebCamDevice[] devices = WebCamTexture.devices;
-
         if (devices.Length == 0)
         {
             Debug.LogError("No camera detected");
             return;
         }
 
-        // Choose camera (front or back)
         string deviceName = "";
         foreach (WebCamDevice device in devices)
         {
@@ -83,233 +90,181 @@ public class GestureRecognizer : MonoBehaviour
             }
         }
 
-        // If no matching camera found, use the first one
-        if (string.IsNullOrEmpty(deviceName) && devices.Length > 0)
-        {
+        if (string.IsNullOrEmpty(deviceName))
             deviceName = devices[0].name;
-        }
 
-        // Create webcam texture - let it use its native resolution first
-        webCamTexture = new WebCamTexture(deviceName);
+        webCamTexture = new WebCamTexture(deviceName, targetWidth, targetHeight, targetFrameRate);
         webCamTexture.Play();
 
-        // Wait for the webcam to initialize
         StartCoroutine(WaitForWebcamInitialization());
     }
 
     private IEnumerator WaitForWebcamInitialization()
     {
-        // Wait for webcam to be ready
         while (webCamTexture.width <= 16 || webCamTexture.height <= 16)
-        {
             yield return null;
-        }
-        // 1920x1080
-        // Debug.Log($"Webcam initialized: {webCamTexture.width}x{webCamTexture.height}");
 
-        // Create new webcam texture with adjusted resolution
-        webCamTexture.Stop();
-        webCamTexture = new WebCamTexture(webCamTexture.deviceName, targetWidth, targetHeight, targetFrameRate);
-        webCamTexture.Play();
-
-        // Wait for it to initialize again
-        while (webCamTexture.width <= 16 || webCamTexture.height <= 16)
-        {
-            yield return null;
-        }
-
-        // Set up display
         if (cameraDisplay != null)
         {
             cameraDisplay.texture = webCamTexture;
             cameraDisplay.rectTransform.localScale = new Vector3(-0.1125f, 0.1125f, 0.1125f);
-
         }
 
-        // Create texture for capturing frames with fixed 4:3 aspect ratio
         captureTexture = new Texture2D(captureWidth, captureHeight, TextureFormat.RGB24, false);
-
     }
 
     private Color32[] CropWebcamTo4x3(Color32[] pixels, int webcamWidth, int webcamHeight)
     {
         float webcamAspect = (float)webcamWidth / webcamHeight;
-        float targetAspect = (float)captureWidth / captureHeight; // 4:3
+        float targetAspect = (float)captureWidth / captureHeight;
 
-        int cropX = 0, cropY = 0;
-        int cropWidth = webcamWidth;
-        int cropHeight = webcamHeight;
+        int cropX = 0, cropY = 0, cropWidth = webcamWidth, cropHeight = webcamHeight;
 
         if (webcamAspect > targetAspect)
         {
-            // Webcam is wider than 4:3, crop width
             cropWidth = Mathf.RoundToInt(webcamHeight * targetAspect);
             cropX = (webcamWidth - cropWidth) / 2;
         }
         else if (webcamAspect < targetAspect)
         {
-            // Webcam is taller than 4:3, crop height
             cropHeight = Mathf.RoundToInt(webcamWidth / targetAspect);
             cropY = (webcamHeight - cropHeight) / 2;
         }
 
-        // Create array for cropped pixels
         Color32[] croppedPixels = new Color32[captureWidth * captureHeight];
-
-        // Sample from cropped area and resize to capture dimensions
         for (int y = 0; y < captureHeight; y++)
         {
             for (int x = 0; x < captureWidth; x++)
             {
-                // Map from capture coordinates to cropped webcam coordinates
                 int sourceX = cropX + (x * cropWidth) / captureWidth;
                 int sourceY = cropY + (y * cropHeight) / captureHeight;
-
-                // Clamp to ensure we don't go out of bounds
                 sourceX = Mathf.Clamp(sourceX, 0, webcamWidth - 1);
                 sourceY = Mathf.Clamp(sourceY, 0, webcamHeight - 1);
-
-                // Unity textures are bottom-left origin, so we need to flip Y
                 int sourceIndex = sourceY * webcamWidth + sourceX;
                 int targetIndex = y * captureWidth + x;
-
                 croppedPixels[targetIndex] = pixels[sourceIndex];
             }
         }
-
         return croppedPixels;
     }
 
-    private bool isRequesting = false;
+    private void CropAndResizeWebcam()
+    {
+        // สร้าง RenderTexture ขนาด target
+        RenderTexture rt = RenderTexture.GetTemporary(captureWidth, captureHeight, 0);
+
+        // ใช้ Graphics.Blit() crop & resize webcamTexture ลง RenderTexture
+        Graphics.Blit(webCamTexture, rt);
+
+        // อ่าน pixels กลับมาเป็น Texture2D
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = rt;
+
+        captureTexture.ReadPixels(new Rect(0, 0, captureWidth, captureHeight), 0, 0);
+        captureTexture.Apply();
+
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(rt);
+    }
+
+    async System.Threading.Tasks.Task ConnectWebSocket()
+    {
+        websocket = new WebSocket(serverUrl);
+
+        // websocket.OnOpen += () => Debug.Log("WebSocket connected");
+        // websocket.OnError += (e) => Debug.LogError("WebSocket error: " + e);
+        // websocket.OnClose += (e) => Debug.Log("WebSocket closed: " + e);
+        websocket.OnMessage += (bytes) =>
+        {
+            string message = Encoding.UTF8.GetString(bytes);
+            try
+            {
+                GestureResponse response = JsonUtility.FromJson<GestureResponse>(message);
+                currentGesture = response.gesture;
+                currentFps = response.fps;
+
+                if (currentGesture == "no") currentGesture = "stop";
+
+                if (currentGesture == "transition") return;
+
+                if (gpManager != null)
+                {
+                    gpManager.gestureText.text = currentGesture;
+                    gpManager.fpsText.text = Mathf.Round(currentFps).ToString();
+                }
+
+                // Debug.Log($"Gesture: {currentGesture}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Failed to parse WS message: " + ex.Message);
+            }
+        };
+
+        await websocket.Connect();
+    }
 
     void Update()
     {
+#if !UNITY_WEBGL || UNITY_EDITOR
+        websocket?.DispatchMessageQueue();
+#endif
+
         if (webCamTexture == null || !webCamTexture.isPlaying) return;
 
         timeSinceLastCapture += Time.deltaTime;
         if (timeSinceLastCapture >= captureInterval && !isRequesting)
         {
             timeSinceLastCapture = 0f;
-            StartCoroutine(CaptureAndRecognize());
+            StartCoroutine(CaptureAndSendWebSocket());
         }
     }
 
-    IEnumerator CaptureAndRecognize()
+    IEnumerator CaptureAndSendWebSocket()
     {
         if (isRequesting) yield break;
         isRequesting = true;
 
-        // Don't try to capture if texture isn't ready
         if (webCamTexture.width <= 16 || webCamTexture.height <= 16)
         {
+            isRequesting = false;
             yield break;
         }
 
-        // Capture texture is always fixed at 1280x960, no need to resize
-        if (captureTexture == null)
+        // Color32[] webcamPixels = webCamTexture.GetPixels32();
+        // Color32[] croppedPixels = CropWebcamTo4x3(webcamPixels, webCamTexture.width, webCamTexture.height);
+        // captureTexture.SetPixels32(croppedPixels);
+        // captureTexture.Apply();
+        CropAndResizeWebcam();
+
+        byte[] pngData = captureTexture.EncodeToPNG();
+
+        if (websocket.State == WebSocketState.Open)
         {
-            captureTexture = new Texture2D(captureWidth, captureHeight, TextureFormat.RGB24, false);
+            websocket.Send(pngData);
         }
 
-        string jsonData = "";
-
-        // WebGL-specific fix: ensure texture is readable
-        try
-        {
-            // Capture frame from webcam
-            Color32[] webcamPixels = webCamTexture.GetPixels32();
-
-            // Crop and resize to 4:3 aspect ratio (1280x960)
-            Color32[] croppedPixels = CropWebcamTo4x3(webcamPixels, webCamTexture.width, webCamTexture.height);
-
-            // Apply cropped pixels to capture texture
-            captureTexture.SetPixels32(croppedPixels);
-            captureTexture.Apply();
-
-            // Convert texture to jpg with higher quality for WebGL
-            byte[] jpgData = captureTexture.EncodeToJPG(50);
-            string base64Image = Convert.ToBase64String(jpgData);
-
-            // Create request data
-            GestureRequest requestData = new GestureRequest { image = base64Image };
-            jsonData = JsonUtility.ToJson(requestData);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Error capturing image: {e.Message}");
-            yield break;
-        }
-
-        // Send to server (outside try block to avoid yield in try-catch)
-        using (UnityWebRequest request = new UnityWebRequest(serverUrl, "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            // WebGL-specific timeout settings
-            request.timeout = 10;
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                try
-                {
-                    GestureResponse response = JsonUtility.FromJson<GestureResponse>(request.downloadHandler.text);
-
-                    if (response.error == null)
-                    {
-                        // Update gesture
-                        currentGesture = response.gesture;
-                        currentFps = response.fps;
-                        // OnGestureDetected(currentGesture);
-
-                        if (currentGesture == "stop")
-                        {
-                            currentGesture = "grab";
-                        }
-                        else if (currentGesture == "no")
-                        {
-                            currentGesture = "stop";
-                        }
-
-                        gestureText.text = currentGesture;
-                        fpsText.text = Mathf.Round(currentFps).ToString();
-                    }
-                    // else
-                    // {
-                    // Debug.LogError($"Server error: {response.error}");
-                    // }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError($"Error processing server response: {e.Message}");
-                }
-            }
-            else
-            {
-                Debug.LogError($"Request error: {request.error}");
-            }
-        }
         isRequesting = false;
+        yield return null;
+
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (webCamTexture != null && webCamTexture.isPlaying)
         {
             webCamTexture.Stop();
         }
-
         if (captureTexture != null)
         {
             DestroyImmediate(captureTexture);
         }
+        if (websocket != null)
+        {
+            websocket.Close();
+        }
     }
 
-    // Public method to get current gesture
     public string GetCurrentGesture()
     {
         return currentGesture;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RecipeManager : MonoBehaviour
 {
+
     [Header("Recipe UI")]
     [SerializeField] private List<GameObject> _menuCardList; // 4
     [SerializeField] private GameObject nextRecipe;
@@ -48,11 +49,10 @@ public class RecipeManager : MonoBehaviour
 
     public void CloseRecipePanel()
     {
-        Debug.Log("Closing Recipe Panel");
+        // Debug.Log("Closing Recipe Panel");
         gameObject.SetActive(false);
         nextRecipe.SetActive(false);
         prevRecipe.SetActive(false);
-        GameplayUIManager.Instance.TogglePlayerCanvas(true);
     }
 
     public void ApplyRenderCurrentPage(int gameStage = 0)
@@ -96,7 +96,7 @@ public class RecipeManager : MonoBehaviour
 
         int stageIndex = gameStage;
 
-        FoodObjectList stageData = StageManager.Instance.stageList[stageIndex].foodList;
+        FoodObjectList stageData = StageManager.Instance.stageList[stageIndex - 1].foodList;
         int foodCount = stageData.data.Count;
         for (int i = 0; i < foodCount; i++)
         {

@@ -53,3 +53,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25c5d65e55ed8a0448a4128d10845f24, type: 2}
   - {fileID: 11400000, guid: 7f30fcfb458ef2d47a9a238a99d880c3, type: 2}
   - {fileID: 11400000, guid: f5f44d763d7f105429d37183491d876f, type: 2}
+  menuSetting: {fileID: 0}
+  foodList: {fileID: 11400000, guid: 7947abca1c0926346bb8e637160d57af, type: 2}
+  ingredientList: {fileID: 11400000, guid: b2abe0ce0e40bf549836820d53d54b28, type: 2}
+  wasteIngredient: {fileID: 11400000, guid: 9463505bdb4a26d4f959e25091bebaa6, type: 2}
+  milkList: {fileID: 11400000, guid: b71eb6d516fe2af4c944d665c9bf6fd9, type: 2}

@@ -33,10 +33,7 @@ public class AudioManager : MonoBehaviour
             sound.source.loop = sound.loop;
 
         }
-    }
 
-    void Start()
-    {
         bgmSounds = Array.FindAll(sounds, sound => sound.BGM);
 
         bgmMaxVolumes = new float[bgmSounds.Length];
@@ -53,6 +50,11 @@ public class AudioManager : MonoBehaviour
         {
             sfxMaxVolumes[i] = sfxSounds[i].volume;
         }
+    }
+
+    void Start()
+    {
+
     }
 
     void DelayPlay(Sound sound, float delay)

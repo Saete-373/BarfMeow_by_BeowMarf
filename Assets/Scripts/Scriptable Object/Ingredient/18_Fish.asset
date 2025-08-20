@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6765514a4ed3dc48898582ada430fc3, type: 3}
+  m_Name: 18_Fish
+  m_EditorClassIdentifier: 
+  ingredientName: GoatMilk_Boil
+  prefab: {fileID: 4768444212578948594, guid: ff657fea5c467c04089a51c914f3a331, type: 3}
+  imageUI: {fileID: 1519512812, guid: 4ceb568568f53d448ac08f9384373e03, type: 3}
+  imageInPlate: {fileID: 1450272119, guid: 8673b3d042079ca428988e09d0d1be0e, type: 3}

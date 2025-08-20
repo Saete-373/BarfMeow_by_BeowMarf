@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7163369383729059862}
   - component: {fileID: 7932552053524033374}
   - component: {fileID: 8268826011825003409}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TableSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 1916676148738373792}
   - component: {fileID: 1401860317003510779}
   - component: {fileID: 4236567072046528015}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DeliveryTable
   m_TagString: delivery
   m_Icon: {fileID: 0}

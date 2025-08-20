@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 03_Fish_Cut
   m_EditorClassIdentifier: 
   ingredientName: Fish_Cut
-  ingredientPart: {fileID: 2817631183811046102, guid: 8198599f84eea724a95907190a0e0c3c, type: 3}
-  ingredientSprite: {fileID: -1659134966, guid: 50306fc0f377f414f8e8019c11febeab, type: 3}
-  cookedSprite: {fileID: 55417044, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}
+  prefab: {fileID: 2817631183811046102, guid: 8198599f84eea724a95907190a0e0c3c, type: 3}
+  imageUI: {fileID: -1659134966, guid: 50306fc0f377f414f8e8019c11febeab, type: 3}
+  imageInPlate: {fileID: 55417044, guid: 6ff30874da81a2a41b9190cb50f66083, type: 3}

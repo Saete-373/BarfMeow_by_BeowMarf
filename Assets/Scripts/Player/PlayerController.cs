@@ -90,6 +90,9 @@ public class PlayerController : MonoBehaviour
         { "right", new Vector2(1, 0) }
     };
 
+    private Vector2 targetMoveDir;
+    private Vector2 smoothedMoveDir;
+
     #endregion
 
     private void Awake()
@@ -133,7 +136,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        smoothedMoveDir = Vector2.MoveTowards(smoothedMoveDir, _moveDir, 5f * Time.fixedDeltaTime);
+        Vector2 move = moveSpeed * Time.fixedDeltaTime * smoothedMoveDir;
+        _rb.MovePosition(_rb.position + move);
 
+        CalculateFacingDetection();
+        UpdateAnimation();
     }
 
     #endregion
@@ -318,10 +326,9 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        _rb.velocity = _moveDir.normalized * moveSpeed * Time.fixedDeltaTime;
 
-        CalculateFacingDetection();
-        UpdateAnimation();
+
+
     }
 
     #region Move Interaction

@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07366a11225382044aef2946c2aa5557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 100
-  moveSpeed: 100
+  maxMoveSpeed: 1.5
+  moveSpeed: 1.5
   _rb: {fileID: 6954628960355847083}
   _animator: {fileID: 8419016216564830830}
   _spriteRenderer: {fileID: 5541833739550069535}
@@ -154,6 +154,7 @@ MonoBehaviour:
     ItemOnTable: {fileID: 0}
     DishOnTable: {fileID: 0}
   faceDir: 4
+  isCooldownHand: 0
 --- !u!114 &7038701816495255732
 MonoBehaviour:
   m_ObjectHideFlags: 0

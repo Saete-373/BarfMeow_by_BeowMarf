@@ -117,9 +117,9 @@ public class GameplayManager : MonoBehaviour
             uiManager.UpdateTimeUI(CurrentTime, false);
 
 
-            if (CurrentTime <= 60 && currentGameState == GameState.Playing)
+            if (CurrentTime <= 10 && currentGameState == GameState.Playing)
             {
-                Debug.Log("Hurry up! Only 1 minute left!");
+                Debug.Log("Hurry up! Only 10 seconds left!");
                 if (!isTriggerHurryUp)
                 {
                     isTriggerHurryUp = true;

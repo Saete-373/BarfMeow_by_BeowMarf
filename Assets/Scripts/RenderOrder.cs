@@ -102,10 +102,10 @@ public class RenderOrder : MonoBehaviour
     {
         return difficulty switch
         {
-            "Easy" => 5f,
-            "Medium" => 10f,
-            "Hard" => 15f,
-            _ => 5f // Default case
+            "Easy" => 20f,
+            "Medium" => 40f,
+            "Hard" => 60f,
+            _ => 20f // Default case
         };
     }
 

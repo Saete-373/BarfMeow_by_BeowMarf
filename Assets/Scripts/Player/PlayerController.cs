@@ -241,8 +241,6 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(OnOpenRecipe);
                 OnOpenRecipe = null;
             }
-
-            gameplayManager.uiManager._recipeManager.CloseRecipePanel();
         }
 
         if (CurrentGesture != "setting")

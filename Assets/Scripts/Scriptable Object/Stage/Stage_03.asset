@@ -15,5 +15,5 @@ MonoBehaviour:
   stageName: STAGE 3
   stageNumber: 3
   rent: 20
-  playTime: 300
+  playTime: 360
   foodList: {fileID: 11400000, guid: ae2d50453bc055942a6bf13a0d84f75a, type: 2}

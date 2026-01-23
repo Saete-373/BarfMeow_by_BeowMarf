@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class IngredientMethodUI : MonoBehaviour
 {
     [SerializeField] private Image _ingredientImage;
+    [SerializeField] private TMP_Text _ingredientNameText;
     [SerializeField] private GameObject _methodGO1;
     [SerializeField] private List<GameObject> _methodList1;
     [SerializeField] private GameObject _method2GO;
@@ -14,6 +16,10 @@ public class IngredientMethodUI : MonoBehaviour
     {
 
         _ingredientImage.sprite = ingredient.imageUI;
+
+        string originalName = ingredient.ingredientName;
+        originalName = originalName.Split("_")[0];
+        _ingredientNameText.text = originalName;
 
         _ingredientImage.SetNativeSize();
 
